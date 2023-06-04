@@ -2,5 +2,29 @@
 {% load static %}
 
 {% block content %}
-
+    <div class="container mx-auto flex items-center justify-center">
+        <div class="max-w-[534px] w-full flex items-center justify-center my-4">
+            <form action="{% url 'new_post' %}" method="post" class="w-full">
+                {% csrf_token %}
+                <div class="px-4 flex flex-col gap-4 text-sm relative">
+                    {% include "alerts/alerts.html" %}
+                    <h1 class="font-semibold text-[2.075rem] py-5">Publicar novo conteúdo</h1>
+                    <div class="flex flex-col gap-4">
+                        <label for="title" class="flex flex-col gap-1 text-dark">
+                            {{form.title}}
+                        </label>
+                        <label for="description" class="flex flex-col gap-1 text-dark">
+                            {{form.description}}
+                        </label>
+                        <label for="source" class="flex flex-col gap-1 text-dark">
+                            {{form.source}}
+                        </label>
+                        <button type="submit" class="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-lg">
+                            Publicar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

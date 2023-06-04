@@ -8,6 +8,12 @@ class Account(AbstractUser):
     tab_cash = models.IntegerField(blank=True,default=0)
     email_notify = models.BooleanField("Notificação por email", default=True)
 
+    slug = models.SlugField(blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.username
+        return super().save(*args, **kwargs)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username',]
