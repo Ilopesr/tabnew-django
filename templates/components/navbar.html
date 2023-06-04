@@ -1,4 +1,5 @@
-<header class="bg-dark w-full">
+{% load static %}
+<header class="bg-dark dark:bg-[##30363d] w-full">
     <div class="px-3 py-4 flex flex-row gap-3 items-center justify-between text-white">
         <div class="flex-2 flex items-center gap-2 font-bold text-sm">
             <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" height="32" width="32" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.9999 4C20.6568 4 21.9999 5.34315 21.9999 7V17C21.9999 18.6569 20.6568 20 18.9999 20H4.99994C3.34308 20 1.99994 18.6569 1.99994 17V7C1.99994 5.34315 3.34308 4 4.99994 4H18.9999ZM19.9999 9.62479H13C12.4478 9.62479 11.8442 9.20507 11.652 8.68732L10.6542 6H4.99994C4.44765 6 3.99994 6.44772 3.99994 7V17C3.99994 17.5523 4.44765 18 4.99994 18H18.9999C19.5522 18 19.9999 17.5523 19.9999 17V9.62479Z" fill="currentColor"></path></svg>
@@ -6,84 +7,96 @@
         </div>
         <div class="flex-2 font-bold text-sm">
             <div class="{% if request.path == '/' %} border-b-[1px] border-white {% endif %}">
-                 <a href="#">Relevantes</a>
+                <a href="#">Relevantes</a>
             </div>
         </div>
         <div class="flex-1 font-bold text-sm">
             <div class="{% if request.path == '/recentes/' %} border-b-[1px] border-white {% endif %}">
-                 <a href="#">Recentes</a>
+                <a href="#">Recentes</a>
             </div>
         </div>
         {% if request.user.is_authenticated %}
-        <div class="hidden hover:text-gray-300 cursor-pointer md:flex items-center">
-            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-plus" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"></path></svg>
-        </div>
-        <div class="cursor-pointer  flex items-center relative group/coins" aria-label="TabCoins" alt="TabCoins">
-             <div class="absolute invisible top-[115%] right-0 group-hover/coins:visible bg-neutral-900 py-0.5 px-2 rounded-md text-xs">TabCoins</div>
-            <svg class="text-blue-500"  aria-hidden="true" focusable="false" role="img" class="octicon octicon-square-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M5.75 4h4.5c.966 0 1.75.784 1.75 1.75v4.5A1.75 1.75 0 0 1 10.25 12h-4.5A1.75 1.75 0 0 1 4 10.25v-4.5C4 4.784 4.784 4 5.75 4Z"></path></svg>
-            <p class="text-xs">{{request.user.tab_coins}}</p>
-        </div>
-        <div class="cursor-pointer  flex items-center relative group/cash" aria-label="TabCash">
-            <div class="absolute invisible top-[115%] right-0 group-hover/cash:visible bg-neutral-900 py-0.5 px-2 rounded-md text-xs">TabCash</div>
-            <svg class="text-green-500" aria-hidden="true" focusable="false" role="img" class="octicon octicon-square-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M5.75 4h4.5c.966 0 1.75.784 1.75 1.75v4.5A1.75 1.75 0 0 1 10.25 12h-4.5A1.75 1.75 0 0 1 4 10.25v-4.5C4 4.784 4.784 4 5.75 4Z"></path></svg>
-            <p class="text-xs">{{request.user.tab_cash}}</p>
-        </div>
-        <div class="relative">
-            <details class="text-gray-400">
-                <summary class="w-[28px] h-[28px] ring-[1px] ring-gray-400 rounded-md bg-gray-100 flex items-center justify-center">
-                    <svg class="text-neutral-800" aria-hidden="true" focusable="false" role="img" class="octicon octicon-person-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"></path></svg>
-                </summary>
-                <ul class="absolute top-[110%] right-0 min-w-[200px] bg-white text-neutral-800 py-2 border-gray-300 rounded-lg divide-y-[1px] divide-gray-300 flex flex-col">
-                    <li class="px-3 py-2 rounded-md text-sm cursor-pointer flex items-center gap-2 m-1 hover:bg-gray-100 bg-opacity-10">
-                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-home" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"></path></svg>
-                        <p>{{request.user.username}}</p>
-                    </li>
-                    <li class="py-2">
-                        <ul>
-                            <li class="px-3 py-1 rounded-md text-sm cursor-pointer m-1 hover:bg-gray-100 bg-opacity-10">Publicas novo conteudo</li>
-                            <li class="px-3 py-1 rounded-md text-sm cursor-pointer m-1 hover:bg-gray-100 bg-opacity-10">Meus conteúdos</li>
-                            <li class="px-3 py-1 rounded-md text-sm cursor-pointer m-1 hover:bg-gray-100 bg-opacity-10">
-                                <a href="{% url 'account' %} ">Editar perfil</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <div class="px-3 py-2 rounded-md text-sm cursor-pointer m-1 bg-gray-100 bg-opacity-10">
-                            <div class="py-1 rounded-md flex flex-row  bg-gray-100 divide-x-[1px] divide-gray-300">
-                            <button class="flex-1">
-                                    <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-moon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"></path></svg>
-                            </button>
-                            <button class="flex-1 text-blue-500 px-4">Auto</button>
-                            <button class="flex-1">
-                                    <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-sun" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"></path></svg>
-                            </button>
-                        </div>
-                        </div>
+            <div class="hidden hover:text-gray-300 cursor-pointer md:flex items-center">
+                <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-plus" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z"></path></svg>
+            </div>
+            <div class="cursor-pointer  flex items-center relative group/coins" aria-label="TabCoins" alt="TabCoins">
+                <div class="absolute invisible top-[115%] right-0 group-hover/coins:visible bg-neutral-900 py-0.5 px-2 rounded-md text-xs">TabCoins</div>
+                <svg class="text-blue-500"  aria-hidden="true" focusable="false" role="img" class="octicon octicon-square-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M5.75 4h4.5c.966 0 1.75.784 1.75 1.75v4.5A1.75 1.75 0 0 1 10.25 12h-4.5A1.75 1.75 0 0 1 4 10.25v-4.5C4 4.784 4.784 4 5.75 4Z"></path></svg>
+                <p class="text-xs">{{request.user.tab_coins}}</p>
+            </div>
+            <div class="cursor-pointer  flex items-center relative group/cash" aria-label="TabCash">
+                <div class="absolute invisible top-[115%] right-0 group-hover/cash:visible bg-neutral-900 py-0.5 px-2 rounded-md text-xs">TabCash</div>
+                <svg class="text-green-500" aria-hidden="true" focusable="false" role="img" class="octicon octicon-square-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M5.75 4h4.5c.966 0 1.75.784 1.75 1.75v4.5A1.75 1.75 0 0 1 10.25 12h-4.5A1.75 1.75 0 0 1 4 10.25v-4.5C4 4.784 4.784 4 5.75 4Z"></path></svg>
+                <p class="text-xs">{{request.user.tab_cash}}</p>
+            </div>
+            <div class="relative">
+                <details open class="text-gray-400">
+                    <summary class="w-[28px] h-[28px] ring-[1px] ring-gray-400 rounded-md bg-gray-100 flex items-center justify-center">
+                        <svg class="text-neutral-800" aria-hidden="true" focusable="false" role="img" class="octicon octicon-person-fill" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M4.243 4.757a3.757 3.757 0 1 1 5.851 3.119 6.006 6.006 0 0 1 3.9 5.339.75.75 0 0 1-.715.784H2.721a.75.75 0 0 1-.714-.784 6.006 6.006 0 0 1 3.9-5.34 3.753 3.753 0 0 1-1.664-3.118Z"></path></svg>
+                    </summary>
+                    <ul class="absolute top-[110%] right-0 min-w-[200px] bg-white text-neutral-800 py-2 border-gray-300 rounded-lg divide-y-[1px] divide-gray-300 flex flex-col">
+                        <li class="px-3 py-2 rounded-md text-sm cursor-pointer flex items-center gap-2 m-1 hover:bg-gray-100 bg-opacity-10">
+                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-home" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"></path></svg>
+                            <p>{{request.user.username}}</p>
+                        </li>
+                        <li class="py-2">
+                            <ul>
+                                <li class="px-3 py-1 rounded-md text-sm cursor-pointer m-1 hover:bg-gray-100 bg-opacity-10">Publicas novo conteudo</li>
+                                <li class="px-3 py-1 rounded-md text-sm cursor-pointer m-1 hover:bg-gray-100 bg-opacity-10">Meus conteúdos</li>
+                                <li class="px-3 py-1 rounded-md text-sm cursor-pointer m-1 hover:bg-gray-100 bg-opacity-10">
+                                    <a href="{% url 'account' %} ">Editar perfil</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="px-3 rounded-md text-sm cursor-pointer m-1 bg-gray-100 bg-opacity-10">
+                                <div class="rounded-md flex flex-row gap-1  bg-gray-100 ring-opacity-100">
+                                    <button id="switch-dark-mode" class="switch-dark-mode z-10 flex-1 rounded-md hover:bg-gray-200 bg-opacity-20">
+                                        <svg  aria-hidden="true" focusable="false" role="img" class="octicon octicon-moon " viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"></path></svg>
+                                    </button>
+                                    <hr class="py-2 h-2 my-2 border-[0.0300rem] border-gray-300">
+                                    <button id="switch-mode-auto" class="flex-1 text-blue-500 px-4 hover:bg-gray-200 bg-opacity-20 rounded-md">Auto</button>
+                                    <hr class="py-2 h-2 my-2 border-[0.0300rem] border-gray-300">
+                                    <button id="switch-light-mode" class="switch-dark-mode z-10 flex-1 rounded-md hover:bg-gray-200 bg-opacity-20">
+                                        <svg  aria-hidden="true" focusable="false" role="img" class="octicon octicon-sun" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <script>
 
-                    </li>
-                    <li >
-                        <a href="{% url 'logout' %}">
-                            <div class="px-3 py-1 rounded-md  text-red-400 text-sm cursor-pointer m-1 hover:bg-red-100 bg-opacity-10">
-                            Deslogar
-                        </div>
-                        </a>
-                    </li>
-                </ul>
-            </details>
-        </div>
+                            </script>
+                        </li>
+                        <li >
+                            <a href="{% url 'logout' %}">
+                                <div class="px-3 py-1 rounded-md  text-red-400 text-sm cursor-pointer m-1 hover:bg-red-100 bg-opacity-10">
+                                    Deslogar
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </details>
+            </div>
         {% else %}
+            <button id="dark-mode" class="light-mode" onclick="" >
+                <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-moon icon dark-mode-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                    <path d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"></path>
+                </svg>
+                <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-sun icon light-mode-icon" viewBox="0 0 16 16" width="16"
+                     height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                    <path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z">
+                    </path>
+                </svg>
+            </button>
+            <script>
+            </script>
 
-        <button id="dark-mode" class="light-mode" onclick="">
-            {% include "utils/svgs/moon_svg.html" %}
-        </button>
 
-
-        <div class="text-sm font-semibold">
-            <a href="{% url 'login' %}">Login</a>
-        </div>
-        <div class="text-sm font-semibold">
-            <a href="{% url 'signup' %}">Cadastrar</a>
-        </div>
+            <div class="text-sm font-semibold">
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+            <div class="text-sm font-semibold">
+                <a href="{% url 'signup' %}">Cadastrar</a>
+            </div>
 
         {% endif %}
 

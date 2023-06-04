@@ -1,17 +1,13 @@
-<footer class="w-full border-t-[1px] border-gray-400 text-dark">
+<footer class="w-full border-t-[1px] border-gray-300 border-opacity-30 text-dark flex items-end sm:items-center">
     <div class="container mx-auto flex flex-col sm:flex-row items-center justify-center gap-0 sm:gap-2">
         <div class="w-full sm:w-auto order-2 sm:order-none flex flex-row items-center justify-center pb-4 sm:p-0">
             <div class="pl-8 flex-1 text-gray-500 flex items-center justify-center gap-2 text-md  text-sm">
                 <svg stroke="currentColor" fill="none" stroke-width="0" viewBox="0 0 24 24" height="26" width="26" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.9999 4C20.6568 4 21.9999 5.34315 21.9999 7V17C21.9999 18.6569 20.6568 20 18.9999 20H4.99994C3.34308 20 1.99994 18.6569 1.99994 17V7C1.99994 5.34315 3.34308 4 4.99994 4H18.9999ZM19.9999 9.62479H13C12.4478 9.62479 11.8442 9.20507 11.652 8.68732L10.6542 6H4.99994C4.44765 6 3.99994 6.44772 3.99994 7V17C3.99994 17.5523 4.44765 18 4.99994 18H18.9999C19.5522 18 19.9999 17.5523 19.9999 17V9.62479Z" fill="currentColor"></path></svg>
                 <p>&copy; 2023 TabNews</p>
             </div>
-            <div class="sm:hidden flex-3 w-10 items-center pr-2">
-                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" >
-                    <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z"></path></svg>
-                </button>
-            </div>
+
         </div>
-        <nav class="order-1 sm:order-none  flex justify-center  py-4  flex flex-wrap gap-4 list-none text-sm ">
+        <nav class="order-1 sm:order-none  flex justify-center  py-4  flex flex-wrap gap-4 list-none text-sm text-blue-500">
             <li>Contato</li>
             <li>GitHub</li>
             <li>Museu</li>
@@ -20,6 +16,11 @@
             <li>Status</li>
             <li>Termos de uso</li>
         </nav>
-    </div>
 
+    </div>
+    <div class="order-3 w-10 flex items-center justify-end pr-2 text-gray-500 pb-5 sm:pb-0">
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" >
+            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z"></path></svg>
+        </button>
+    </div>
 </footer>
