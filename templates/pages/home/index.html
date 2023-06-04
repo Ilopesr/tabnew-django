@@ -3,13 +3,14 @@
 
 {% block content%}
     <div class="sm:container mx-auto sm:max-w-[58.5rem] mt-6 flex flex-col items-center md:block">
-        <div class="flex flex-row gap-2">
+        {% for posts in posts %}
+            <div class="flex flex-row gap-2">
             <div class="">
                 <span class="font-semibold">1.</span>
             </div>
             <article class="Box-sc-g0xbh4-0 fXxQUH">
                 <div class="font-semibold">
-                    <a sx="[object Object]" class="font-semibold" href="/moacirmoda/como-eu-validei-a-ideia-do-meu-saas">Como eu validei a ideia do meu SaaS (parte 1)</a>
+                    <a sx="[object Object]" class="font-semibold" href="">{{posts.title}}</a>
                 </div>
                 <div class="text-xs">
                     <span class="Text-sc-17v1xeu-0 bLDAWn">4 tabcoins</span>
@@ -28,5 +29,6 @@
                 </div>
             </article>
         </div>
+        {% endfor %}
     </div>
 {% endblock %}

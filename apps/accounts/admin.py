@@ -13,7 +13,7 @@ class AccountAdmin(UserAdmin):
     model = Account
     list_display = ('email','username', 'last_login', 'date_joined', 'is_active')
     list_filter = ('email','username', 'last_login', 'date_joined', 'is_active')
-    readonly_fields = ('last_login', 'date_joined')
+    readonly_fields = ('last_login', 'date_joined',"slug")
 
     fieldsets = (
         ('Configurações', {"fields": ("email", "password","email_notify")}),
@@ -21,6 +21,7 @@ class AccountAdmin(UserAdmin):
         ("Permissões", {"fields": ("is_superuser", "is_staff",
                                    "is_active", "groups", "user_permissions")}),
         ("Datas importantes", {"fields": ("date_joined", "last_login")}),
+        ("Imutáveis", {"fields": ("slug",)})
 
     )
     add_fieldsets = (

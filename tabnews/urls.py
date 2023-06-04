@@ -19,8 +19,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+
+#MARKDOWN
+from markdownx import urls as markdownx
 # TABNEWS
 from tabnews import views
+#POSTS
+from apps.posts.views import (NewPostView,
+                              PostDetailView)
 # ACCOUNTS
 from apps.accounts.views import (LoginView,
                                  NewAccountView,
@@ -32,11 +38,19 @@ from apps.accounts.views import (LoginView,
                                  ChangePasswordView,
                                  )
 
+
 # INCLUDE
 urlpatterns = [
     path('perfil/', include('apps.accounts.urls')),
+    path('markdownx/', include(markdownx)),
 
 ]
+#POSTS
+
+urlpatterns += {
+    path('publicar/', NewPostView.as_view(), name="new_post"),
+    path('<slug:user_slug>/<slug:post_slug>/', PostDetailView.as_view(), name="post_detail"),
+}
 
 # ACCOUNT PATHS
 urlpatterns += {
