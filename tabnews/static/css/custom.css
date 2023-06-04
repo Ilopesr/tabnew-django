@@ -1,0 +1,37 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+
+  .alert-success {
+    background: rgb(151, 237, 151);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    text-indent: 4px;
+    color: rgb(28, 133, 28);
+  }
+
+  .alert-success > button{
+    color: rgb(40, 147, 40);
+  }
+
+  .alert-danger {
+    background: rgb(200, 150, 151);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    text-indent: 4px;
+    color: rgb(168, 74, 75);;
+  }
+
+  .alert-danger > button{
+    color: rgb(196, 80, 81);
+  }

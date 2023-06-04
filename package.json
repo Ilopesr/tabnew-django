@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "dev": "tailwindcss -i tabnews/static/css/main.css -o  tabnews/static/css/main.min.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
+}
