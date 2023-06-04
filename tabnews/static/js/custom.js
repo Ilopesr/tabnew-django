@@ -13,8 +13,12 @@ function updateTheme(theme) {
         $("#switch-mode-auto").addClass('ring-[0.0500rem] ring-gray-400 bg-dark bg-opacity-10 auto-switch');
         if(localStorage.getItem('theme') === 'dark') {
             $("html").removeClass('light').addClass('dark');
+            $('#dark-mode .light-mode-icon').hide();
+            $('#dark-mode .dark-mode-icon').show();
         } else{
             $("html").removeClass('light').removeClass('dark');
+            $('#dark-mode .light-mode-icon').show();
+            $('#dark-mode .dark-mode-icon').hide();
         }
     }else if (theme === 'dark') {
     $('#dark-mode').removeClass('light-mode').addClass('dark-mode');
@@ -80,11 +84,13 @@ $("#dark-mode").on('click', (e) => {
   if (darkMode.hasClass('light-mode')) {
     localStorage.setItem('theme', 'light');
     $("html").removeClass('dark');
+    localStorage.removeItem('auto-theme');
     darkMode.find('.light-mode-icon').show();
     darkMode.find('.dark-mode-icon').hide();
   } else if (darkMode.hasClass('dark-mode')) {
     localStorage.setItem('theme', 'dark');
     $("html").addClass('dark');
+    localStorage.removeItem('auto-theme');
     darkMode.find('.light-mode-icon').hide();
     darkMode.find('.dark-mode-icon').show();
   }

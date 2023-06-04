@@ -22,20 +22,42 @@ from django.conf import settings
 # TABNEWS
 from tabnews import views
 # ACCOUNTS
-from apps.accounts.views import LoginView, NewAccountView,LogoutView,new_account_active
+from apps.accounts.views import (LoginView,
+                                 NewAccountView,
+                                 LogoutView,
+                                 new_account_active,
+                                 RecoverPasswordView,
+                                 NotifyEmailView,
+                                 recover_password_decode,
+                                 ChangePasswordView,
+                                 )
+
 # INCLUDE
 urlpatterns = [
     path('perfil/', include('apps.accounts.urls')),
 
 ]
-# PATHS
-urlpatterns += [
-    path('admin/', admin.site.urls),
-    path('', views.IndexView.as_view(), name='index'),
+
+# ACCOUNT PATHS
+urlpatterns += {
     path('login/', LoginView.as_view(), name="login"),
     path('sair/', LogoutView.as_view(), name="logout"),
     path('cadastrar/', NewAccountView.as_view(), name="signup"),
-    path('cadastrar/<uidb64>/<token>/', new_account_active, name="signup_active")
+    path('cadastrar/<uidb64>/<token>/', new_account_active, name="signup_active"),
+    path('cadastro/recuperar/', RecoverPasswordView.as_view(), name="recover"),
+    path('cadastro/recuperar/confirmar/', NotifyEmailView.as_view(), name="email_notify"),
+    path('cadastro/recuperar/senha/decode/<uidb64>/<token>/', recover_password_decode, name="recover_decode"),
+    path('cadastro/recuperar/senha/validado/', ChangePasswordView.as_view(), name="change_password"),
+}
+
+#HOME
+urlpatterns += {
+    path('', views.IndexView.as_view(), name='index'),
+}
+
+# ADMIN
+urlpatterns += [
+    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

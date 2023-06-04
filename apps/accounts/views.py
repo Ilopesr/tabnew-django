@@ -36,38 +36,44 @@ class NewAccountView(FormView):
         if username_check:
             messages.error(self.request, "Nome de usuário existente, tente outro.")
             return redirect('signup')
+        else:
+            if email_check:
+                messages.error(self.request, "Email existente, tente outro.")
+                return  redirect('signup')
+            else:
+                try:
+                    user = Account.objects.create_user(
+                        username=username,
+                        email=email,
+                        is_active=False,
+                    )
+                    user.set_password(password)
+                    user.save()
+                    mail_subject = "Confirmar cadastro"
+                    mail_message = render_to_string("pages/accounts/notifications/new_account_notify.html", {
+                        'domain': get_current_site(self.request),
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'user': user,
+                    })
+                    to_email = user.email
+                    email = EmailMessage(
+                        mail_subject,
+                        mail_message,
+                        to=[to_email,]
+                    )
+                    email.send()
+                    return redirect('email_notify')
+                except ValueError as er:
+                    messages.error(self.request, er)
+                    return redirect('signup')
 
-        if email_check:
-            messages.error(self.request, "Email existente, tente outro.")
-            return  redirect('signup')
 
-        try:
-            user = Account.objects.create_user(
-                username=username,
-                email=email,
-                is_active=False,
-            )
-            user.set_password(password)
-            user.save()
-            mail_subject = "Confirmar cadastro"
-            mail_message = render_to_string("pages/accounts/notifications/new_account_notify.html", {
-                'domain': get_current_site(self.request),
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
-                'user': user,
-            })
-            to_email = user.email
-            email = EmailMessage(
-                mail_subject,
-                mail_message,
-                to=[to_email,]
-            )
-            email.send()
-            return redirect('email_notify')
-        except ValueError as er:
-            messages.error(self.request, er)
-            return redirect('signup')
-
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('index')
+        else:
+            return super().dispatch(request, *args, **kwargs)
 def new_account_active(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -77,7 +83,6 @@ def new_account_active(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request,"Usuário ativado com sucesso.")
         return redirect('login')
     else:
         return redirect('signup')
@@ -94,22 +99,26 @@ class LoginView(FormView):
             auth = authenticate(email=email, password=password)
             if auth:
                 login(self.request, auth)
-                messages.success(
-                    self.request, f'Bem vindo, tenha um otimo dia {auth.first_name}')
                 return redirect('index')
             else:
                 messages.error(self.request, 'Cheque seu email, e ative sua conta.')
                 return redirect('login')
         else:
-            messages.error(self.request, 'Email incorreto')
+            messages.error(self.request, 'Dados não conferem. Verifique se os dados enviados estão corretos.')
             return redirect('login')
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('index')
+        else:
+            return super().dispatch(request, *args, **kwargs)
 
 
 class LogoutView(LoginRequiredMixin, View):
     def get(self, *args , **kwargs):
         logout(self.request)
         return redirect('login')
+
 
 class AccountView(FormView):
     template_name = "pages/accounts/edit_profile.html"

@@ -12,7 +12,7 @@ class NewAccountForm(forms.Form):
         super(NewAccountForm, self).__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs[
-                'class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300'
+                'class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300 dark:text-dark'
 
 
 class LoginForm(forms.Form):
@@ -22,7 +22,7 @@ class LoginForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300'
+            self.fields[field].widget.attrs['class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300 dark:text-dark'
 
 class AccountForm(forms.ModelForm):
     class Meta:
@@ -32,12 +32,12 @@ class AccountForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AccountForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300'
+            self.fields[field].widget.attrs['class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300 dark:text-dark'
 
 
 class RecoverPasswordForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(
-        attrs={'class': 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300'}))
+        attrs={'class': 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300 dark:text-dark'}))
 
 
 class ChangePasswordForm(forms.Form):
@@ -47,4 +47,4 @@ class ChangePasswordForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(ChangePasswordForm, self).__init__(*args, **kwargs)
         for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300'
+            self.fields[field].widget.attrs['class'] = 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-300 dark:text-dark'
