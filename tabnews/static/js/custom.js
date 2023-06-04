@@ -95,3 +95,5 @@ $("#dark-mode").on('click', (e) => {
     darkMode.find('.dark-mode-icon').show();
   }
 });
+
+
