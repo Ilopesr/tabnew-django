@@ -7,15 +7,16 @@ module.exports = {
     "./templates/**/*.html",
     "./templates/**/**/*.html",
     "**/**/*.html",
-    "**/**/*.py",
+    "**/**/forms.py",
     "tabnews/static/js/custom.js"
   ],
   theme: {
     extend: {
       colors: {
-          'dark': '#1f2328',
+          'dark': 'rgb(22, 27, 34)',
           'darkMode': '#0d1117',
-          'darkButton': 'rgb(48, 54, 61)'
+          'darkButton': 'rgb(48, 54, 61)',
+          'darkInput': 'rgb(1, 4, 9)',
       }
     },
   },

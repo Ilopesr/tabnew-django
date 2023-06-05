@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block content%}
-    <div class="sm:container mx-auto sm:max-w-[58.5rem] mt-6 flex flex-col items-center md:block">
+    <div class="sm:container mx-auto sm:max-w-[58.5rem] mt-6 flex flex-col gap-4 items-center md:block">
         {% for posts in posts %}
-            <div class="flex flex-row gap-2">
+            <div class="flex flex-row gap-2 my-4">
             <div class="">
-                <span class="font-semibold">1.</span>
+                <span class="font-semibold">{{ forloop.counter }}.</span>
             </div>
             <article class="Box-sc-g0xbh4-0 fXxQUH">
                 <div class="font-semibold">
-                    <a sx="[object Object]" class="font-semibold" href="">{{posts.title}}</a>
+                    <a class="font-semibold" href="{% url 'post_detail' user_slug=posts.user.slug post_slug=posts.slug %}">{{posts.title}}</a>
                 </div>
                 <div class="text-xs">
-                    <span class="Text-sc-17v1xeu-0 bLDAWn">4 tabcoins</span>
+                    <span class="Text-sc-17v1xeu-0 bLDAWn">{{posts.tab_coins}} tabcoins</span>
                     ·
                     <span class="Text-sc-17v1xeu-0 bLDAWn">8 comentários</span>
                     ·
-                    <a sx="[object Object]" class="Link__StyledLink-sc-14289xe-0 gVcuCx" href="/moacirmoda">moacirmoda</a>
+                    <a class="Link__StyledLink-sc-14289xe-0 gVcuCx" href="#">{{posts.user.username}}</a>
                     ·
                     <span class="Text-sc-17v1xeu-0 bLDAWn">
                         <span role="tooltip" aria-label="sábado, 3 de junho de 2023 às 08:34" class="Tooltip__TooltipBase-sc-uha8qm-0 hsZHZO tooltipped-nw">
