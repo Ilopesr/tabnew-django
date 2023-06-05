@@ -42,6 +42,7 @@ from apps.accounts.views import (LoginView,
 # INCLUDE
 urlpatterns = [
     path('perfil/', include('apps.accounts.urls')),
+    path('posts/', include('apps.posts.urls')),
     path('markdownx/', include(markdownx)),
 
 ]
