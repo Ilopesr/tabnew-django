@@ -1,5 +1,6 @@
+import datetime
+
 from markdownx.models import MarkdownxField
-from markdownx.utils import markdownify
 
 from django.urls import reverse
 from django.db import models
@@ -23,15 +24,29 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        else:
+            if self.slug != self.title:
+                self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+    def post_at(self):
+        try:
+            data = datetime.date.today() - self.post_date
+            if data.days == 0:
+                return "Hoje"
+            elif data.days == 1:
+                return f"{data.days} dia atrás"
+            else:
+                return f"{data.days} dias atrás"
+        except:
+            pass
+
 
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('index')
 
-    @property
-    def formatted_markdown(self):
-        return markdownify(self.description)
+
 
     def __str__(self):
         return self.title

@@ -3,37 +3,37 @@
 {% load markdown_filter %}
 
 {% block content %}
-    <div class="flex justify-center  py-3 px-4 mt-3">
-        <div class="mx-auto sm:w-full lg:w-3/5 flex flex-col gap-2 justify-center">
-        <div class="flex flex-row gap-2 h-auto text-xs">
-            <div class="h-full flex flex-col items-center gap-2 py-4 text-gray-400">
-                <div class="flex flex-col items-center justify-center gap-2">
-                    <button>
-                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z"></path></svg>
-                    </button>
-                    <span class="text-blue-500">4</span>
-                    <button>
-                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path></svg>
-                    </button>
+    <div class="container mx-auto sm:max-w-[58.5rem] my-6 flex justify-center">
+        <div class="flex flex-col justify-center">
+            <div class="flex flex-row  gap-2  h-auto text-xs">
+                <div class="h-full flex flex-col justify-center items-center  gap-2 py-4 text-gray-400">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <button>
+                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z"></path></svg>
+                        </button>
+                        <span class="text-blue-500">{{object.tab_coins}}</span>
+                        <button>
+                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path></svg>
+                        </button>
+                    </div>
+                    <span class="h-[100%] border-l-[2px] w-[0.125rem] border-dotted hover:border-red-500">
+                    </span>
                 </div>
-                <span class="h-[100%] border-l-[1px] w-[0.125rem] border-dotted">
-                </span>
+                <div class="flex flex-col w-96 sm:w-auto">
+                    <div class="">
+                        <span class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{object.user.username}}</span> {{object.post_at}}
+                    </div>
+                    <div class="text-3xl font-bold">
+                        {{object.title}}
+                    </div>
+                    <div class="bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col gap-4">
+                        {{object.description|show_markdown|safe}}
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-col gap-1 leading-8">
-                <div class="">
-                    <span class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{user_slug}}</span> 1 dia atrás
-                </div>
-                <div class="text-3xl font-bold">
-                    {{object.title}}
-                </div>
-                <div class="codehilite dark:bg-transparent">
-                    {{object.description|show_markdown|safe}}
-                </div>
+            <div class="p-4 border-[1px] border-gray-300 border-opacity-20 rounded-md ">
+                <button class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">Responder</button>
             </div>
         </div>
-        <div class="p-4 border-[1px] border-gray-300 border-opacity-20 rounded-md ">
-            <button class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">Responder</button>
-        </div>
-    </div>
     </div>
 {% endblock %}

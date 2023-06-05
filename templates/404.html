@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container mx-auto h-full flex items-center justify-center  py-3 px-4 mt-3">
+        <div class="h-2/3 flex items-center justify-center">
+            <h1 class="h-full">
+                <div class="flex flex-col gap-4 text-center items-center justify-center">
+                    <div class="flex flex-row gap-2 items-center">
+                            <img alt="Ícone do Bot triste" loading="lazy" width="100" height="100" decoding="async" data-nimg="1" style="color:transparent" class="border-r-[0.0125rem] border-gray-300 border-opacity-20 h-full " src="{% static 'images/svgs/bot-sleepy-face-dark-transparent.6fd852c0.svg' %}">
+
+                            <h1 class="text-4xl font-bold">404</h1>
+                    </div>
+                    <h2 class="text-4xl font-bold ">Página não encontrada</h2>
+                    <a class="text-blue-500" href="{% url 'index' %}">Retornar à tela inicial</a>
+                </div>
+            </h1>
+        </div>
+    </div>
+{% endblock %}
