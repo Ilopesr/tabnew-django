@@ -647,6 +647,11 @@ video {
   margin-bottom: 1rem;
 }
 
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .mt-24 {
   margin-top: 6rem;
 }
@@ -691,6 +696,10 @@ video {
   height: 0.5rem;
 }
 
+.h-2\/3 {
+  height: 66.666667%;
+}
+
 .h-\[100\%\] {
   height: 100%;
 }
@@ -729,6 +738,14 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .min-w-\[200px\] {
@@ -862,8 +879,8 @@ video {
   border-bottom-width: 1px;
 }
 
-.border-l-\[1px\] {
-  border-left-width: 1px;
+.border-l-\[2px\] {
+  border-left-width: 2px;
 }
 
 .border-r-\[0\.0125rem\] {
@@ -1055,6 +1072,11 @@ video {
   line-height: 2.25rem;
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .text-\[2\.075rem\] {
   font-size: 2.075rem;
 }
@@ -1069,6 +1091,10 @@ video {
   line-height: 1rem;
 }
 
+.font-black {
+  font-weight: 900;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1079,10 +1105,6 @@ video {
 
 .leading-6 {
   line-height: 1.5rem;
-}
-
-.leading-8 {
-  line-height: 2rem;
 }
 
 .text-blue-500 {
@@ -1177,40 +1199,9 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (min-width: 640px) {
-  .sm\:container {
-    width: 100%;
-  }
-
-  @media (min-width: 640px) {
-    .sm\:container {
-      max-width: 640px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .sm\:container {
-      max-width: 768px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .sm\:container {
-      max-width: 1024px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .sm\:container {
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1536px) {
-    .sm\:container {
-      max-width: 1536px;
-    }
-  }
+.hover\:border-red-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
 .hover\:bg-gray-100:hover {
@@ -1338,10 +1329,6 @@ video {
     width: auto;
   }
 
-  .sm\:w-full {
-    width: 100%;
-  }
-
   .sm\:max-w-\[58\.5rem\] {
     max-width: 58.5rem;
   }
@@ -1374,11 +1361,5 @@ video {
 
   .md\:flex {
     display: flex;
-  }
-}
-
-@media (min-width: 1024px) {
-  .lg\:w-3\/5 {
-    width: 60%;
   }
 }

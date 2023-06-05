@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView,DetailView,TemplateView
 from django.urls import reverse
 from apps.posts.models import  Post
@@ -19,14 +19,20 @@ class NewPostView(CreateView):
         return super().form_valid(form)
 
 
-class PostDetailView(TemplateView):
+class PostDetailView(DetailView):
     template_name = "pages/posts/post_detail.html"
+    model = Post
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['object'] = Post.objects.get(slug=kwargs.get('post_slug'))
+    def get(self, *args, **kwargs):
+        user_slug = self.kwargs.get('user_slug')
+        post_slug = self.kwargs.get('post_slug')
+        queryset = get_object_or_404(Post, user__slug=user_slug, slug=post_slug)
+        context = {
+            'object': queryset
+        }
+        return render(self.request, self.template_name, context)
 
-        return context
+
 
 
 

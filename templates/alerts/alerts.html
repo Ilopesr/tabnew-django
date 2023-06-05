@@ -1,27 +1,27 @@
 {% if messages %}
-{% for message in messages %}
-<div class="message w-full leading-6">
-  <div {% if message.tags %} class="py-2 px-4 w-full alert alert-{{ message.tags }}" {% endif %}
-    role="alert">
-    <button type="button" class="close px-4" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
-    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% endif %}
-    {{ message }}
-  </div>
-</div>
+  {% for message in messages %}
+    <div class="message w-full leading-6">
+      <div {% if message.tags %} class="py-2 px-4 w-full alert alert-{{ message.tags }}" {% endif %}
+           role="alert">
+        <button type="button" class="close px-4" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% endif %}
+        {{ message }}
+      </div>
+    </div>
 
-<script>
-  $(document).ready(function () {
-    $(".message").each(function (index) {
-      var $message = $(this);
-      setTimeout(function () {
-        $message.fadeOut();
-      }, 5000 * (index + 1));
-    });
-    $(".close").on("mousedown", function () {
-      $(this).parent("div:has(button)").fadeOut();
-    })
-  });
+    <script>
+      $(document).ready(function () {
+        $(".message").each(function (index) {
+          var $message = $(this);
+          setTimeout(function () {
+            $message.fadeOut();
+          }, 5000 * (index + 1));
+        });
+        $(".close").on("mousedown", function () {
+          $(this).parent("div:has(button)").fadeOut();
+        })
+      });
 
-</script>
-{% endfor %}
+    </script>
+  {% endfor %}
 {% endif %}
