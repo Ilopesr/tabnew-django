@@ -46,12 +46,7 @@ urlpatterns = [
     path('markdownx/', include(markdownx)),
 
 ]
-#POSTS
 
-urlpatterns += {
-    path('publicar/', NewPostView.as_view(), name="new_post"),
-    path('<slug:user_slug>/<slug:post_slug>/', PostDetailView.as_view(), name="post_detail"),
-}
 
 # ACCOUNT PATHS
 urlpatterns += {
@@ -68,6 +63,13 @@ urlpatterns += {
 #HOME
 urlpatterns += {
     path('', views.IndexView.as_view(), name='index'),
+}
+
+#POSTS
+
+urlpatterns += {
+    path('publicar/', NewPostView.as_view(), name="new_post"),
+    path('<slug:user_slug>/<slug:post_slug>/', PostDetailView.as_view(), name="post_detail"),
 }
 
 # ADMIN

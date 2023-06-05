@@ -181,3 +181,32 @@ span.linenos.special { color: #50fa7b; background-color: #6272a4; padding-left: 
   border-left: 2px solid #ccc;
   font-style: italic;
 }
+
+/* Estilos básicos para a tabela */
+.default-html table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  background: rgb(249 250 251);
+}
+
+/* Estilos para o cabeçalho da tabela */
+.default-html table th {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Estilos para as células da tabela */
+.default-html table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* Estilos alternados para linhas */
+.default-html table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+

@@ -24,13 +24,16 @@ class PostDetailView(DetailView):
     model = Post
 
     def get(self, *args, **kwargs):
-        user_slug = self.kwargs.get('user_slug')
-        post_slug = self.kwargs.get('post_slug')
-        queryset = get_object_or_404(Post, user__slug=user_slug, slug=post_slug)
-        context = {
-            'object': queryset
-        }
-        return render(self.request, self.template_name, context)
+        try:
+            user_slug = self.kwargs.get('user_slug')
+            post_slug = self.kwargs.get('post_slug')
+            queryset = get_object_or_404(Post, user__slug=user_slug, slug=post_slug)
+            context = {
+                'object': queryset
+            }
+            return render(self.request, self.template_name, context)
+        except ValueError:
+            pass
 
 
 
