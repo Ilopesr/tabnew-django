@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
     <script src="{% static 'js/custom.js' %}" defer></script>
+
 </head>
-<body class="bg-gray-50 dark:bg-darkMode text-dark font-sans">
+<body class="bg-gray-50 dark:bg-darkMode text-dark font-sans border-box">
 
 {% include "components/navbar.html" %}
 
-<main class="min-h-screen text-dark dark:text-white">
+<main class="min-h-screen container mx-auto text-dark dark:text-white ">
 
     {% block content %}
 

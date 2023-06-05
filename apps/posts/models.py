@@ -1,4 +1,5 @@
 from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 
 from django.urls import reverse
 from django.db import models
@@ -27,6 +28,10 @@ class Post(models.Model):
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('index')
+
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.description)
 
     def __str__(self):
         return self.title
