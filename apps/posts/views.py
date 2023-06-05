@@ -13,7 +13,7 @@ class PostDetailView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['object'] = Post.objects.get(title=kwargs.get('post_slug'))
+        context['object'] = Post.objects.get(slug=kwargs.get('post_slug'))
 
         return context
 

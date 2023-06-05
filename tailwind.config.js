@@ -15,6 +15,7 @@ module.exports = {
       colors: {
           'dark': '#1f2328',
           'darkMode': '#0d1117',
+          'darkButton': 'rgb(48, 54, 61)'
       }
     },
   },
