@@ -1,6 +1,11 @@
 asgiref==3.7.2
 Django==4.2.1
+django-markdownx==4.0.2
 djhtml==3.0.6
+Markdown==3.4.3
+Pillow==9.5.0
+Pygments==2.15.1
 python-decouple==3.8
 sqlparse==0.4.4
 tzdata==2023.3
+whitenoise==6.4.0
