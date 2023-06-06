@@ -1,33 +1,58 @@
 {% if objects %}
-<form action="{% url 'add_post' pk=objects.id post_slug=object.slug %}" method="post" class="flex flex-col gap-2 items-start">
-{% csrf_token %}
-<textarea name="comment_post" id="{{objects.id}}" cols="30" rows="1" class="hidden w-full bg-darkButton text-white p-2"></textarea>
-    <div  class="send w-full flex flex-row gap-4 justify-end">
-        <div onmousedown="closeForm(this)" class="px-4 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+<form action="{% url 'add_post' pk=objects.id post_slug=object.slug %}" method="post"
+    class="flex flex-col gap-2 items-start">
+    {% csrf_token %}
+    <textarea name="comment_post" id="{{objects.id}}" cols="30" rows="1"
+        class="hidden w-full bg-darkButton text-white p-2"></textarea>
+    <div class="send w-full flex flex-row gap-4 justify-end">
+        <div onmousedown="closeForm(this)"
+            class="px-4 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
             Cancelar
         </div>
-        <button type="submit" class="px-4  bg-gray-300 dark:bg-green-500 hover:bg-green-400 rounded-md border-[0.0125rem] border-green-500   hover:dark:border-opacity-20">
+        <button type="submit"
+            class="px-4  bg-gray-300 dark:bg-green-500 hover:bg-green-400 rounded-md border-[0.0125rem] border-green-500   hover:dark:border-opacity-20">
             Publicar
         </button>
     </div>
-<div onmousedown="openForm(this)" id="open-form" class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">Responder</div>
+    {% if request.user.is_authenticated %}
+    <div onmousedown="openForm(this)" id="open-form"
+        class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+        Responder</div>
+    {% else %}
+
+    <a href="{% url 'login' %}"
+        class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+        Responder</a>
+    {% endif %}
+
 </form>
 
 {% else %}
-<form action="{% url 'add_post' pk=comments.id post_slug=object.slug %}" method="post" class="flex flex-col gap-2 items-start">
+<form action="{% url 'add_post' pk=comments.id post_slug=object.slug %}" method="post"
+    class="flex flex-col gap-2 items-start">
     {% csrf_token %}
-<textarea name="comment_comment" id="{{comments.id}}" cols="30" rows="1" class="hidden w-full bg-darkButton text-white p-2"></textarea>
-        <div  class="send w-full flex flex-row gap-4 justify-end">
-        <div onmousedown="closeForm(this)" class="px-4 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+    <textarea name="comment_comment" id="{{comments.id}}" cols="30" rows="1"
+        class="hidden w-full bg-darkButton text-white p-2"></textarea>
+    <div class="send w-full flex flex-row gap-4 justify-end">
+        <div onmousedown="closeForm(this)"
+            class="px-4 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
             Cancelar
         </div>
-        <button type="submit" class="px-4  bg-gray-300 dark:bg-green-500 hover:bg-green-400 rounded-md border-[0.0125rem] border-green-500   hover:dark:border-opacity-20">
+        <button type="submit"
+            class="px-4  bg-gray-300 dark:bg-green-500 hover:bg-green-400 rounded-md border-[0.0125rem] border-green-500   hover:dark:border-opacity-20">
             Publicar
         </button>
     </div>
-<div onmousedown="openForm(this)" id="open-form" class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">Responder</div>
+    {% if request.user.is_authenticated %}
+    <div onmousedown="openForm(this)" id="open-form"
+        class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+        Responder</div>
+    {% else %}
+
+    <a href="{% url 'login' %}"
+        class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+        Responder</a>
+    {% endif %}
 
 </form>
 {% endif %}
-
-

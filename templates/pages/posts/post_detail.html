@@ -3,87 +3,115 @@
 {% load markdown_filter %}
 
 {% block content %}
-    <div class=" my-6 container mx-auto px-4" >
-        <div class="w-full flex flex-col gap-4 justify-center">
-            <div class=" flex gap-2  h-auto text-xs">
-                <div class="h-full flex flex-col justify-start items-center  gap-2 py-4 text-gray-400">
-                    <div class="flex flex-col items-center justify-start gap-2">
-                        <button>
-                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z"></path></svg>
-                        </button>
-                        <span class="text-blue-500">{{object.tab_coins}}</span>
-                        <button>
-                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path></svg>
-                        </button>
-                    </div>
-                    <div class="flex h-full">
-                            <span class="border-l-[1px] w-[0.125rem] border-dotted hover:border-red-500"></span>
-                        </div>
+<div class=" my-6 container mx-auto max-w-5xl px-4">
+    <div class="w-full flex flex-col gap-4 justify-center">
+        <div class=" flex gap-2  h-auto text-xs">
+            <div class="h-full flex flex-col justify-start items-center  gap-2 py-4 text-gray-400">
+                <div class="flex flex-col items-center justify-start gap-2">
+                    <button>
+                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up"
+                            viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
+                            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                            <path
+                                d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <span class="text-blue-500">{{object.tab_coins}}</span>
+                    <button>
+                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down"
+                            viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
+                            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                            <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
-                <div class="flex flex-col container">
-                    <div class="">
-                        <span class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{object.user.username}}</span> {{object.post_at}}
-                    </div>
-                    <div class="text-3xl font-bold">
-                        {{object.title}}
-                    </div>
-                    <div class=" bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col gap-4">
-                        {{object.description|show_markdown|safe}}
-                    </div>
+                <div class="flex h-full">
+                    <span class="border-l-[1px] w-[0.125rem] border-dotted hover:border-red-500"></span>
                 </div>
             </div>
-            <div class=" p-4 border-[1px] border-gray-300 border-opacity-20 rounded-md">
-                {% include 'pages/posts/includes/add_comment.html' with objects=object %}
+            <div class="flex flex-col gap-2 container">
+                <div class="">
+                    <span
+                        class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{object.user.username}}</span>
+                    {{object.post_at}}
+                </div>
+                <div class="text-3xl font-bold">
+                    {{object.title}}
+                </div>
+                <div class=" bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col gap-4">
+                    {{object.description|show_markdown|safe}}
+                </div>
+            </div>
+        </div>
+        <div class=" p-4 border-[1px] border-gray-300 border-opacity-20 rounded-md">
+            {% include 'pages/posts/includes/add_comment.html' with objects=object %}
+        </div>
+    </div>
+</div>
+{% for comment in object.comments.all %}
+<div class="my-0 container mx-auto max-w-5xl px-4">
+    <div class=" flex flex-col gap-4 justify-center">
+        <div class=" flex gap-2 text-xs">
+            <div class=" flex flex-col justify-start items-center  gap-2 py-4 text-gray-400">
+                <div class="flex flex-col items-center justify-start gap-2">
+                    <button>
+                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up"
+                            viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
+                            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                            <path
+                                d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <span class="text-blue-500">{{comment.tab_coins}}</span>
+                    <button>
+                        <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down"
+                            viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
+                            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                            <path
+                                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex h-full">
+                    <span class="border-l-[1px] w-[0.125rem] border-dotted hover:border-red-500"></span>
+                </div>
+
+            </div>
+            <div class="flex flex-col w-full flex w-[350px] sm:w-[700px] md:w-[1000px]">
+                <div class="">
+                    <span
+                        class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{comment.user.username}}</span>
+                    {{comment.post_at}}
+                </div>
+                <div class="text-3xl font-bold">
+                    {{comment.title}}
+                </div>
+                <div class=" bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col gap-4">
+                    {{comment.description|show_markdown|safe}}
+                </div>
+                <div class="my-2 flex flex-col">
+                    {% include 'pages/posts/includes/add_comment.html' with comments=comment %}
+                </div>
+                <div class="mb-2 ">
+                    {% include 'pages/posts/includes/comment_tree.html' with comments=comment.child_comments.all %}
+                </div>
             </div>
         </div>
     </div>
-    {% for  comment in object.comments.all %}
-    <div class="my-0 container mx-auto px-4" >
-            <div class=" flex flex-col gap-4 justify-center">
-                <div class=" flex gap-2 text-xs">
-                    <div class=" flex flex-col justify-start items-center  gap-2 py-4 text-gray-400">
-                        <div class="flex flex-col items-center justify-start gap-2">
-                            <button>
-                                <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z"></path></svg>
-                            </button>
-                            <span class="text-blue-500">{{comment.tab_coins}}</span>
-                            <button>
-                                <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"><path d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"></path></svg>
-                            </button>
-                        </div>
-                        <div class="flex h-full">
-                            <span class="border-l-[1px] w-[0.125rem] border-dotted hover:border-red-500"></span>
-                        </div>
+</div>
 
-                    </div>
-                    <div class="flex flex-col w-full flex w-[350px] sm:w-[700px] md:w-[1000px]">
-                        <div class="">
-                            <span class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{comment.user.username}}</span> {{comment.post_at}}
-                        </div>
-                        <div class="text-3xl font-bold">
-                            {{comment.title}}
-                        </div>
-                        <div class=" bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col gap-4">
-                            {{comment.description|show_markdown|safe}}
-                        </div>
-                        <div class="my-2 flex flex-col">
-                            {% include 'pages/posts/includes/add_comment.html' with comments=comment %}
-                        </div>
-                        <div class="mb-2 ">
-                            {% include 'pages/posts/includes/comment_tree.html' with comments=comment.child_comments.all %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    {% endfor %}
+{% endfor %}
 <script>
 
 
-    $(window).ready(() =>{
+    $(window).ready(() => {
         const send = $(".send")
-        send.each((index,element) => {
+        send.each((index, element) => {
             $(element).hide()
         })
     })
@@ -103,7 +131,7 @@
         const buttonClose = $(button);
         buttonClose.on('click', (e) => {
             const textarea = buttonClose.parent("div").siblings("textarea")
-            const send= $(".send")
+            const send = $(".send")
             const openFormButton = $("#open-form")
             textarea.hide()
             send.hide()

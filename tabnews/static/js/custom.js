@@ -5,20 +5,20 @@ function detectSystemTheme() {
 }
 
 function updateTheme(theme) {
-    if(localStorage.getItem('auto-theme') === 'true'){
-        $('#switch-light-mode').removeClass('ring-[0.0500rem] ring-gray-300 bg-white bg-opacity-100');
-        $('#switch-dark-mode').removeClass('ring-[0.0500rem] ring-gray-300 bg-dark bg-opacity-10');
-        $("#switch-mode-auto").addClass('ring-[0.0500rem] ring-gray-300 bg-dark bg-opacity-10 auto-switch');
-        if(localStorage.getItem('theme') === 'dark') {
-            $("html").removeClass('light').addClass('dark');
-            $('#dark-mode .light-mode-icon').hide();
-            $('#dark-mode .dark-mode-icon').show();
-        } else{
-            $("html").removeClass('light').removeClass('dark');
-            $('#dark-mode .light-mode-icon').show();
-            $('#dark-mode .dark-mode-icon').hide();
-        }
-    }else if (theme === 'dark') {
+  if (localStorage.getItem('auto-theme') === 'true') {
+    $('#switch-light-mode').removeClass('ring-[0.0500rem] ring-gray-300 bg-white bg-opacity-100');
+    $('#switch-dark-mode').removeClass('ring-[0.0500rem] ring-gray-300 bg-dark bg-opacity-10');
+    $("#switch-mode-auto").addClass('ring-[0.0500rem] ring-gray-300 bg-dark bg-opacity-10 auto-switch');
+    if (localStorage.getItem('theme') === 'dark') {
+      $("html").removeClass('light').addClass('dark');
+      $('#dark-mode .light-mode-icon').hide();
+      $('#dark-mode .dark-mode-icon').show();
+    } else {
+      $("html").removeClass('light').removeClass('dark');
+      $('#dark-mode .light-mode-icon').show();
+      $('#dark-mode .dark-mode-icon').hide();
+    }
+  } else if (theme === 'dark') {
     $('#dark-mode').removeClass('light-mode').addClass('dark-mode');
     $("html").removeClass('light').addClass('dark');
     $('#switch-dark-mode').addClass('ring-[0.0500rem] ring-gray-300 bg-dark bg-opacity-10');
@@ -26,7 +26,7 @@ function updateTheme(theme) {
     $("#switch-mode-auto").removeClass('ring-[0.0500rem] ring-gray-300 bg-dark bg-opacity-10 auto-switch');
     $('#dark-mode .light-mode-icon').hide();
     $('#dark-mode .dark-mode-icon').show();
-  } else if(theme === 'light') {
+  } else if (theme === 'light') {
     $('#dark-mode').removeClass('dark-mode').addClass('light-mode');
     $("html").removeClass('dark').addClass('light');
     $('#switch-light-mode').addClass('ring-[0.0500rem] ring-gray-300 bg-white bg-opacity-100');
@@ -95,3 +95,23 @@ $("#dark-mode").on('click', (e) => {
 });
 
 
+
+// SHOWPASS
+$(window).ready(() => {
+  var passwordInput = $("#id_password");
+  var showPassCheckbox = $("#show-pass");
+
+  showPassCheckbox.prop("checked", false);
+  passwordInput.attr("type", "password"); // Ocultar senha
+
+})
+const togglePasswordVisibility = () => {
+  var passwordInput = $("#id_password");
+  var showPassCheckbox = $("#show-pass");
+
+  if (passwordInput.attr("type") == "text") {
+    passwordInput.attr("type", "password"); // Ocultar senha
+  } else {
+    passwordInput.attr("type", "text"); // Exibir senha
+  }
+}
