@@ -35,27 +35,26 @@ class Post(models.Model):
     import datetime
 
     def post_at(self):
-        try:
-            sao_paulo_tz = pytz.timezone(settings.TIME_ZONE)
-            current_datetime = datetime.datetime.now(sao_paulo_tz)  # Get the current datetime in the Sao Paulo timezone
-            post_datetime = self.post_date.replace(
-                tzinfo=sao_paulo_tz)  # Make the post datetime timezone-aware in Sao Paulo timezone
-            data = current_datetime - post_datetime
-
-            if data.days == 0:
-                hours = data.seconds // 3600
-                if hours == 0:
-                    return "Agora mesmo"
-                elif hours == 1:
-                    return f"{hours} hora atrás"
-                else:
-                    return f"{hours} horas atrás"
-            elif data.days == 1:
-                return "1 dia atrás"
+        sao_paulo_tz = pytz.timezone(settings.TIME_ZONE)
+        current_datetime = datetime.datetime.now(sao_paulo_tz)  # Get the current datetime in the Sao Paulo timezone
+        post_datetime = self.post_date# Make the post datetime timezone-aware in Sao Paulo timezone
+        data = current_datetime - post_datetime
+        if data.days <= 0:
+            hours = data.seconds // 3600
+            if hours == 0:
+                return "Agora mesmo"
+            elif hours == 1:
+                return f"{hours} hora atrás"
             else:
-                return f"{data.days} dias atrás"
-        except:
-            pass
+                return f"{hours} horas atrás"
+        elif data.days == 1:
+            return "1 dia atrás"
+        elif data.days > 1:
+
+            return f"{data.days} dias atrás"
+        else:
+            return ""
+
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('index')
@@ -83,30 +82,27 @@ class Comment(models.Model):
             self.slug = slugify(f"{uuid.uuid4().hex}")
         return super().save(*args, **kwargs)
 
-    import datetime
 
     def post_at(self):
-        try:
-            sao_paulo_tz = pytz.timezone(settings.TIME_ZONE)
-            current_datetime = datetime.datetime.now(sao_paulo_tz)  # Get the current datetime in the Sao Paulo timezone
-            post_datetime = self.post_date.replace(
-                tzinfo=sao_paulo_tz)  # Make the post datetime timezone-aware in Sao Paulo timezone
-            data = current_datetime - post_datetime
-
-            if data.days == 0:
-                hours = data.seconds // 3600
-                if hours == 0:
-                    return "Agora mesmo"
-                elif hours == 1:
-                    return f"{hours} hora atrás"
-                else:
-                    return f"{hours} horas atrás"
-            elif data.days == 1:
-                return "1 dia atrás"
+        sao_paulo_tz = pytz.timezone(settings.TIME_ZONE)
+        current_datetime = datetime.datetime.now(sao_paulo_tz)  # Get the current datetime in the Sao Paulo timezone
+        post_datetime = self.post_date# Make the post datetime timezone-aware in Sao Paulo timezone
+        data = current_datetime - post_datetime
+        if data.days <= 0:
+            hours = data.seconds // 3600
+            if hours == 0:
+                return "Agora mesmo"
+            elif hours == 1:
+                return f"{hours} hora atrás"
             else:
-                return f"{data.days} dias atrás"
-        except:
-            pass
+                return f"{hours} horas atrás"
+        elif data.days == 1:
+            return "1 dia atrás"
+        elif data.days > 1:
+
+            return f"{data.days} dias atrás"
+        else:
+            return ""
 
     def get_absolute_url(self, *args, **kwargs):
         return reverse('index')
