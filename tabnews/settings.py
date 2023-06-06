@@ -29,8 +29,16 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ['192.168.1.106','127.0.0.1','*']
+ALLOWED_HOSTS = ['192.168.1.106','127.0.0.1','*'
+]
+if 'CODESPACE_NAME' in os.environ:
+    codespace_name = os.getenv("CODESPACE_NAME")
+    codespace_domain = os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")
+    CSRF_TRUSTED_ORIGINS = [
+        f'https://{codespace_name}-8000.{codespace_domain}']
 
+X_FRAME_OPTIONS = "ALLOW-FROM preview.app.github.dev"
+# Application definition
 # Application definition
 
 INSTALLED_APPS = [
