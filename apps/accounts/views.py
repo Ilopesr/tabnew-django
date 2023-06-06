@@ -60,6 +60,7 @@ class NewAccountView(FormView):
                     email = EmailMessage(
                         mail_subject,
                         mail_message,
+                        'noreply@igribeiro.com.br',
                         to=[to_email,]
                     )
                     email.send()
@@ -160,6 +161,7 @@ class RecoverPasswordView(FormView):
             email = EmailMessage(
                 mail_subject,
                 mail_message,
+                'noreply@igribeiro.com.br',
                 to=[to_email,]
             )
             email.send()
