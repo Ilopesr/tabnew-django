@@ -1,0 +1,15 @@
+{% if objects %}
+<form action="{% url 'add_post' pk=objects.id post_slug=object.slug %}" method="post" class="flex flex-col gap-2 items-start">
+{% csrf_token %}
+<textarea name="comment_post" id="{{objects.id}}" cols="30" rows="1" class="w-full text-dark p-2"></textarea>
+<button class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">Responder</button>
+</form>
+
+{% else %}
+<form action="{% url 'add_post' pk=comments.id post_slug=object.slug %}" method="post" class="flex flex-col gap-2 items-start">
+    {% csrf_token %}
+<textarea name="comment_comment" id="{{comments.id}}" cols="30" rows="1" class="w-full text-dark p-2"></textarea>
+    <button class="px-4 py-2 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">Responder</button>
+
+</form>
+{% endif %}

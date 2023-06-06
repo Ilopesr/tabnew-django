@@ -1,6 +1,9 @@
 from django.contrib import admin
 from apps.posts.models import Post, Comment
-from markdownx.admin import MarkdownxModelAdmin
-admin.site.register(Post,MarkdownxModelAdmin)
+
 admin.site.register(Comment)
 # Register your models here.
+
+@admin.register(Post)
+class PostModel(admin.ModelAdmin):
+    list_display = ['id','title','tab_coins','source','post_date','post_edited_date']

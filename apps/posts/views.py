@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView,DetailView,TemplateView
-from django.urls import reverse
-from apps.posts.models import  Post
+from django.urls import reverse,resolve
+
+
+from apps.posts.models import  Post, Comment
 from apps.posts.forms import NewPostForm
 from apps.accounts.models import Account
 
@@ -36,6 +38,31 @@ class PostDetailView(DetailView):
             pass
 
 
+
+def add_post(request, pk , post_slug):
+    user = Account.objects.get(email=request.user.email)
+    if 'comment_comment' in  request.POST and pk:
+        description = request.POST['comment_comment']
+        comment = Comment.objects.get(pk=pk)
+        new_comment = Comment.objects.create(
+            user=user,
+            description=description,
+            parent_comment=comment,
+        )
+        new_comment.save()
+        return redirect('post_detail', user_slug=user.slug, post_slug=post_slug)
+    elif 'comment_post' in request.POST and pk:
+        description = request.POST['comment_post']
+        post = Post.objects.get(pk=pk)
+
+        new_comment = Comment.objects.create(
+            user=user,
+            description=description,
+            post=post,
+        )
+        new_comment.save()
+        post.comments.add(new_comment)
+        return redirect('post_detail', user_slug=user.slug, post_slug=post.slug)
 
 
 
