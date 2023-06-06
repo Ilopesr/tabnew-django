@@ -4,8 +4,6 @@ function detectSystemTheme() {
   updateTheme(prefersDarkMode ? 'dark' : 'light');
 }
 
-console.log(localStorage.getItem('auto-theme') == 'true')
-
 function updateTheme(theme) {
     if(localStorage.getItem('auto-theme') === 'true'){
         $('#switch-light-mode').removeClass('ring-[0.0500rem] ring-gray-300 bg-white bg-opacity-100');
