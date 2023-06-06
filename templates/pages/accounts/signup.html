@@ -2,32 +2,34 @@
 {% load static %}
 
 {% block content %}
-    <div class="container mx-auto flex items-center justify-center">
-        <div class="max-w-[534px] w-full flex items-center justify-center my-4">
-            <form action="{% url 'signup' %}" method="post" class="w-full">
-                {% csrf_token %}
-                <div class="px-4 flex flex-col gap-4 text-sm relative">
-                    {% include "alerts/alerts.html" %}
-                    <h1 class="font-semibold text-[2.075rem] py-5">Cadastro</h1>
-                    <div class="flex flex-col gap-4">
-                        <label for="username" class="flex flex-col gap-1">
-                            <p class="font-semibold">Nome de usuário</p>
-                            {{form.username}}
-                        </label>
-                        <label for="email" class="flex flex-col gap-1">
-                             <p class="font-semibold">Email</p>
-                            {{form.email}}
-                        </label>
-                        <label for="password" class="flex flex-col gap-1">
-                             <p class="font-semibold">Senha</p>
-                            {{form.password}}
-                        </label>
-                        <button type="submit" class="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-lg">
-                            Criar cadastro
-                        </button>
-                    </div>
+<div class="container mx-auto flex items-center justify-center">
+    <div class="max-w-[534px] w-full flex items-center justify-center my-4">
+        <form action="{% url 'signup' %}" method="post" class="w-full">
+            {% csrf_token %}
+            <div class="px-4 flex flex-col gap-4 text-sm relative">
+                {% include "alerts/alerts.html" %}
+                <h1 class="font-semibold text-[2.075rem] py-5">Cadastro</h1>
+                <div class="flex flex-col gap-4">
+                    <label for="username" class="flex flex-col gap-1">
+                        <p class="font-semibold">Nome de usuário</p>
+                        {{form.username}}
+                    </label>
+                    <label for="email" class="flex flex-col gap-1">
+                        <p class="font-semibold">Email</p>
+                        {{form.email}}
+                    </label>
+                    <label for="password" class="flex flex-col gap-1 relative">
+                        <p class="font-semibold">Senha</p>
+                        {{form.password}}
+                        {% include "pages/accounts/includes/password_show.html" %}
+                    </label>
+                    <button type="submit"
+                        class="bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-lg">
+                        Criar cadastro
+                    </button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
 {% endblock %}

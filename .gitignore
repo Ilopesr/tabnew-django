@@ -1,0 +1,193 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+migrations
+*.sqlite3
+media
+
+# Backup files # 
+*.bak 
+
+# If you are using PyCharm # 
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Python # 
+*.py[cod] 
+*$py.class 
+
+# Distribution / packaging 
+.Python build/ 
+develop-eggs/ 
+dist/ 
+downloads/ 
+eggs/ 
+.eggs/ 
+lib/ 
+lib64/ 
+parts/ 
+sdist/ 
+var/ 
+wheels/ 
+*.egg-info/ 
+.installed.cfg 
+*.egg 
+*.manifest 
+*.spec 
+
+# Installer logs 
+pip-log.txt 
+pip-delete-this-directory.txt 
+
+# Unit test / coverage reports 
+htmlcov/ 
+.tox/ 
+.coverage 
+.coverage.* 
+.cache 
+.pytest_cache/ 
+nosetests.xml 
+coverage.xml 
+*.cover 
+.hypothesis/ 
+
+# Jupyter Notebook 
+.ipynb_checkpoints 
+
+# pyenv 
+.python-version 
+
+# celery 
+celerybeat-schedule.* 
+
+# SageMath parsed files 
+*.sage.py 
+
+# Environments 
+.env 
+.venv 
+env/ 
+venv/ 
+ENV/ 
+env.bak/ 
+venv.bak/ 
+
+# mkdocs documentation 
+/site 
+
+# mypy 
+.mypy_cache/ 
+
+# Sublime Text # 
+*.tmlanguage.cache 
+*.tmPreferences.cache 
+*.stTheme.cache 
+*.sublime-workspace 
+*.sublime-project 
+
+# sftp configuration file 
+sftp-config.json 
+
+# Package control specific files Package 
+Control.last-run 
+Control.ca-list 
+Control.ca-bundle 
+Control.system-ca-bundle 
+GitHub.sublime-settings 
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+
+
+#NODE
+node_modules/
+apps/__pycache__/__init__.cpython-311.pyc
+apps/accounts/__pycache__/__init__.cpython-311.pyc
+apps/accounts/migrations/__pycache__/__init__.cpython-311.pyc
+apps/posts/__pycache__/__init__.cpython-311.pyc
+apps/posts/migrations/__pycache__/__init__.cpython-311.pyc
+apps/posts/templatetags/__pycache__/__init__.cpython-311.pyc
+tabnews/__pycache__/__init__.cpython-311.pyc
+apps/accounts/__pycache__/__init__.cpython-311.pyc
+apps/accounts/__pycache__/admin.cpython-311.pyc
+apps/accounts/__pycache__/apps.cpython-311.pyc
+apps/accounts/__pycache__/forms.cpython-311.pyc
+apps/accounts/__pycache__/models.cpython-311.pyc
+apps/accounts/__pycache__/urls.cpython-311.pyc
+apps/accounts/__pycache__/views.cpython-311.pyc
+apps/accounts/migrations/__pycache__/__init__.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0001_initial.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0002_account_tab_cash_account_tab_coins.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0003_account_email_notify.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0004_alter_account_email_notify_alter_account_tab_cash_and_more.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0005_alter_account_tab_cash_alter_account_tab_coins.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0006_alter_account_tab_cash_alter_account_tab_coins.cpython-311.pyc
+apps/accounts/migrations/__pycache__/0007_account_slug.cpython-311.pyc
+apps/posts/__pycache__/__init__.cpython-311.pyc
+apps/posts/__pycache__/admin.cpython-311.pyc
+apps/posts/__pycache__/apps.cpython-311.pyc
+apps/posts/__pycache__/forms.cpython-311.pyc
+apps/posts/__pycache__/models.cpython-311.pyc
+apps/posts/__pycache__/urls.cpython-311.pyc
+apps/posts/__pycache__/views.cpython-311.pyc
+apps/posts/migrations/__pycache__/__init__.cpython-311.pyc
+apps/posts/migrations/__pycache__/0001_initial.cpython-311.pyc
+apps/posts/migrations/__pycache__/0002_post_source_alter_post_description.cpython-311.pyc
+apps/posts/migrations/__pycache__/0003_post_slug.cpython-311.pyc
+apps/posts/migrations/__pycache__/0004_alter_post_coments_alter_post_slug.cpython-311.pyc
+apps/posts/migrations/__pycache__/0005_post_post_date_post_post_edited_date_post_user.cpython-311.pyc
+apps/posts/migrations/__pycache__/0006_post_tab_coins.cpython-311.pyc
+apps/posts/migrations/__pycache__/0007_alter_post_post_date_alter_post_post_edited_date.cpython-311.pyc
+apps/posts/migrations/__pycache__/0008_comment_description_comment_parent_comment_and_more.cpython-311.pyc
+apps/posts/migrations/__pycache__/0009_comment_post_alter_post_coments.cpython-311.pyc
+apps/posts/migrations/__pycache__/0010_rename_coments_post_comments.cpython-311.pyc
+apps/posts/migrations/__pycache__/0011_alter_comment_post.cpython-311.pyc
+apps/posts/templatetags/__pycache__/__init__.cpython-311.pyc
+apps/posts/templatetags/__pycache__/markdown_filter.cpython-311.pyc
+apps/posts/templatetags/__pycache__/named_title.cpython-311.pyc
+tabnews/__pycache__/__init__.cpython-311.pyc
+tabnews/__pycache__/markdown_settings.cpython-311.pyc
+tabnews/__pycache__/settings.cpython-311.pyc
+tabnews/__pycache__/urls.cpython-311.pyc
+tabnews/__pycache__/views.cpython-311.pyc
+tabnews/__pycache__/wsgi.cpython-311.pyc
+apps/__pycache__/__init__.cpython-311.pyc

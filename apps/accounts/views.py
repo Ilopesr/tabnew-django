@@ -1,15 +1,16 @@
+from decouple import config
 
-from django.views.generic import FormView, TemplateView , View
-from django.shortcuts import redirect,render
+from django.views.generic import FormView, TemplateView, View
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import login, logout , authenticate
+from django.contrib.auth import login, logout, authenticate
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import  force_bytes
-from django.contrib.auth.tokens import  default_token_generator
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
 from apps.accounts.forms import (AccountForm,
@@ -34,12 +35,13 @@ class NewAccountView(FormView):
         email_check = Account.objects.filter(email=email).exists()
 
         if username_check:
-            messages.error(self.request, "Nome de usuário existente, tente outro.")
+            messages.error(
+                self.request, "Nome de usuário existente, tente outro.")
             return redirect('signup')
         else:
             if email_check:
                 messages.error(self.request, "Email existente, tente outro.")
-                return  redirect('signup')
+                return redirect('signup')
             else:
                 try:
                     user = Account.objects.create_user(
@@ -60,7 +62,7 @@ class NewAccountView(FormView):
                     email = EmailMessage(
                         mail_subject,
                         mail_message,
-                        'noreply@igribeiro.com.br',
+                        config("EMAIL_HOST_USER"),
                         to=[to_email,]
                     )
                     email.send()
@@ -69,12 +71,13 @@ class NewAccountView(FormView):
                     messages.error(self.request, er)
                     return redirect('signup')
 
-
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('index')
         else:
             return super().dispatch(request, *args, **kwargs)
+
+
 def new_account_active(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -87,6 +90,7 @@ def new_account_active(request, uidb64, token):
         return redirect('login')
     else:
         return redirect('signup')
+
 
 class LoginView(FormView):
     template_name = "pages/accounts/signin.html"
@@ -102,10 +106,12 @@ class LoginView(FormView):
                 login(self.request, auth)
                 return redirect('index')
             else:
-                messages.error(self.request, 'Cheque seu email, e ative sua conta.')
+                messages.error(
+                    self.request, 'Cheque seu email, e ative sua conta.')
                 return redirect('login')
         else:
-            messages.error(self.request, 'Dados não conferem. Verifique se os dados enviados estão corretos.')
+            messages.error(
+                self.request, 'Dados não conferem. Verifique se os dados enviados estão corretos.')
             return redirect('login')
 
     def dispatch(self, request, *args, **kwargs):
@@ -116,7 +122,7 @@ class LoginView(FormView):
 
 
 class LogoutView(LoginRequiredMixin, View):
-    def get(self, *args , **kwargs):
+    def get(self, *args, **kwargs):
         logout(self.request)
         return redirect('login')
 
@@ -161,7 +167,7 @@ class RecoverPasswordView(FormView):
             email = EmailMessage(
                 mail_subject,
                 mail_message,
-                'noreply@igribeiro.com.br',
+                config("EMAIL_HOST_USER"),
                 to=[to_email,]
             )
             email.send()
