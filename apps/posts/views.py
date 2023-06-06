@@ -54,7 +54,6 @@ def add_post(request, pk , post_slug):
     elif 'comment_post' in request.POST and pk:
         description = request.POST['comment_post']
         post = Post.objects.get(pk=pk)
-
         new_comment = Comment.objects.create(
             user=user,
             description=description,

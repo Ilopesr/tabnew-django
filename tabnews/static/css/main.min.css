@@ -713,10 +713,6 @@ video {
   height: 66.666667%;
 }
 
-.h-40 {
-  height: 10rem;
-}
-
 .h-\[28px\] {
   height: 28px;
 }
@@ -767,6 +763,10 @@ video {
 
 .max-w-\[534px\] {
   max-width: 534px;
+}
+
+.max-w-lg {
+  max-width: 32rem;
 }
 
 .flex-1 {
@@ -868,10 +868,6 @@ video {
   border-color: rgb(209 213 219 / var(--tw-divide-opacity));
 }
 
-.overflow-auto {
-  overflow: auto;
-}
-
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -931,6 +927,11 @@ video {
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
+.border-green-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
@@ -952,6 +953,11 @@ video {
 .bg-dark {
   --tw-bg-opacity: 1;
   background-color: rgb(22 27 34 / var(--tw-bg-opacity));
+}
+
+.bg-darkButton {
+  --tw-bg-opacity: 1;
+  background-color: rgb(48 54 61 / var(--tw-bg-opacity));
 }
 
 .bg-gray-100 {
@@ -1027,6 +1033,11 @@ video {
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .py-0 {
@@ -1239,6 +1250,11 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-green-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-green-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(22 101 52 / var(--tw-bg-opacity));
@@ -1318,6 +1334,11 @@ video {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
 
+:is(.dark .dark\:bg-green-500) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+
 :is(.dark .dark\:bg-transparent) {
   background-color: transparent;
 }
@@ -1334,6 +1355,10 @@ video {
 :is(.dark .dark\:text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+:is(.dark .hover\:dark\:border-opacity-20):hover {
+  --tw-border-opacity: 0.2;
 }
 
 :is(.dark .dark\:hover\:bg-neutral-700:hover) {
