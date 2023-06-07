@@ -19,12 +19,11 @@ class Post(models.Model):
     title = models.CharField(max_length=100, blank=True, null=False)
     description = MarkdownxField()
     source = models.URLField(blank=True)
-    comments = models.ManyToManyField(
-        'self', blank=True, related_name="child_comments", symmetrical=False)
+    comments = models.ForeignKey(
+        'self', on_delete=models.CASCADE, blank=True, null=True, related_name="child_comments")
     post_date = models.DateTimeField(auto_now_add=True)
     post_edited_date = models.DateTimeField(auto_now=True)
     tab_coins = models.IntegerField(default=0, blank=False, null=False)
-
     slug = models.SlugField(blank=True)
 
     def save(self, *args, **kwargs):
