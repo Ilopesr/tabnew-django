@@ -10,6 +10,10 @@ from apps.posts.forms import NewPostForm, NewCommentForm
 from apps.accounts.models import Account
 
 
+from tabnews.utils.rule import add_point, give_like
+from tabnews.utils.rule import HTTPResponseHXRedirect
+
+
 class NewPostView(CreateView):
     template_name = "pages/posts/new_post.html"
     model = Post
@@ -46,16 +50,14 @@ class PostDetailView(DetailView, FormView):
             pass
 
 
+@add_point
 def add_coment(request, *args, **kwargs):
     if request.method == 'POST':
         description = request.POST['description']
         comment_id = request.POST['comment_id']
         object_id = request.POST['object_id']
-
-        print(description,comment_id,object_id)
-        
         post_query = get_object_or_404(Post, id=object_id)
-        if comment_id == '' and object_id :
+        if comment_id == '' and object_id:
             post = Post.objects.create(
                 description=description,
                 user=request.user,
@@ -64,7 +66,7 @@ def add_coment(request, *args, **kwargs):
             post.save()
             return redirect('post_detail', user_slug=post_query.user.slug, post_slug=post_query.slug)
         else:
-            comment_query = get_object_or_404(Post,id=comment_id)
+            comment_query = get_object_or_404(Post, id=comment_id)
             post = Post.objects.create(
                 description=description,
                 user=request.user,
@@ -73,3 +75,39 @@ def add_coment(request, *args, **kwargs):
             post.save()
             return redirect('post_detail', user_slug=post_query.user.slug, post_slug=post_query.slug)
     return redirect('index')
+
+
+def like(request, *args, **kwargs):
+    try:
+        user = Account.objects.get(email=request.user.email)
+        if user.tab_coins <= 1:
+            return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            id = request.POST['id']
+            post_query = get_object_or_404(Post, id=id)
+            post_query.tab_coins += 1
+            post_query.save()
+
+            user.tab_cash += 1
+            user.tab_coins -= 2
+            user.save()
+    except ValueError:
+        pass
+    return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
+
+
+def deslike(request, *args, **kwargs):
+    try:
+        user = Account.objects.get(email=request.user.email)
+        if user.tab_coins <= 1:
+            return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            id = request.POST['id']
+            post_query = get_object_or_404(Post, id=id)
+            post_query.tab_coins -= 1
+            post_query.save()
+            user.tab_coins -= 2
+            user.save()
+    except ValueError:
+        pass
+    return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))

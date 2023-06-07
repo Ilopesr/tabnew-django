@@ -5,13 +5,13 @@
         <input type="hidden" name="comment_id" value="{{comment.id}}">
         <input type="hidden" name="object_id" value="{{object.id}}">
         {{form.description}}
-        <div class="flex flex-row justify-end gap-4">
+        <div class="flex flex-row justify-end gap-4 font-bold">
             <div onmousedown="closeForm(this)"
-                class="px-4 bg-gray-300 dark:bg-darkButton rounded-md border-[0.0125rem] border-gray-400 dark:border-opacity-20">
+                class="px-4 py-1 text-gray-500 hover:bg-gray-500 hover:bg-opacity-20 dark:bg-darkButton rounded-md dark:border-opacity-20 hover:cursor-pointer">
                 Cancelar
             </div>
             <button type="submit"
-                class="px-4  bg-gray-300 dark:bg-green-500 hover:bg-green-400 rounded-md border-[0.0125rem] border-green-500   hover:dark:border-opacity-20">
+                class="text-white px-4 py-1 bg-green-500 hover:bg-green-400 rounded-md border-[0.0125rem] dark:border-green-500   hover:dark:border-opacity-20 hover:cursor-pointer">
                 Publicar
             </button>
         </div>
