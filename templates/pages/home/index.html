@@ -2,33 +2,35 @@
 {% load static %}
 
 {% block content%}
-    <div class="px-4 container mx-auto sm:max-w-[58.5rem] mt-6 flex flex-col md:block">
-        {% for posts in posts %}
-            <div class="flex flex-row gap-2 my-2">
-            <div class="">
-                <span class="font-semibold">{{ forloop.counter }}.</span>
+<div class="px-4 container mx-auto sm:max-w-[58.5rem] mt-6 flex flex-col md:block">
+    {% for posts in posts %}
+    <div class="flex flex-row gap-2 my-2">
+        <div class="">
+            <span class="font-semibold">{{ forloop.counter }}.</span>
+        </div>
+        <article class="Box-sc-g0xbh4-0 fXxQUH">
+            <div class="font-semibold">
+                <a class="font-black"
+                    href="{% url 'post_detail' user_slug=posts.user.slug post_slug=posts.slug %}">{{posts.title}}</a>
             </div>
-            <article class="Box-sc-g0xbh4-0 fXxQUH">
-                <div class="font-semibold">
-                    <a class="font-black" href="{% url 'post_detail' user_slug=posts.user.slug post_slug=posts.slug %}">{{posts.title}}</a>
-                </div>
-                <div class="text-xs">
-                    <span class="Text-sc-17v1xeu-0 bLDAWn">{{posts.tab_coins}} tabcoins</span>
-                    ·
-                    <span class="Text-sc-17v1xeu-0 bLDAWn">8 comentários</span>
-                    ·
-                    <a class="Link__StyledLink-sc-14289xe-0 gVcuCx" href="#">{{posts.user.username}}</a>
-                    ·
-                    <span class="Text-sc-17v1xeu-0 bLDAWn">
-                        <span role="tooltip" aria-label="sábado, 3 de junho de 2023 às 08:34" class="Tooltip__TooltipBase-sc-uha8qm-0 hsZHZO tooltipped-nw">
-                            <span style="white-space: nowrap;">
-                                {{posts.post_at}}
-                            </span>
+            <div class="text-xs">
+                <span class="Text-sc-17v1xeu-0 bLDAWn">{{posts.tab_coins}} tabcoins</span>
+                ·
+                <span class="Text-sc-17v1xeu-0 bLDAWn">{{posts.total_comments}} comentários</span>
+                ·
+                <a class="Link__StyledLink-sc-14289xe-0 gVcuCx" href="#">{{posts.user.username}}</a>
+                ·
+                <span class="Text-sc-17v1xeu-0 bLDAWn">
+                    <span role="tooltip" aria-label="sábado, 3 de junho de 2023 às 08:34"
+                        class="Tooltip__TooltipBase-sc-uha8qm-0 hsZHZO tooltipped-nw">
+                        <span style="white-space: nowrap;">
+                            {{posts.post_at}}
                         </span>
                     </span>
-                </div>
-            </article>
-        </div>
-        {% endfor %}
+                </span>
+            </div>
+        </article>
     </div>
+    {% endfor %}
+</div>
 {% endblock %}
