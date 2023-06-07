@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, DetailView, FormView
@@ -49,20 +50,26 @@ def add_coment(request, *args, **kwargs):
     if request.method == 'POST':
         description = request.POST['description']
         comment_id = request.POST['comment_id']
+        object_id = request.POST['object_id']
 
-        if comment_id == '':
-
+        print(description,comment_id,object_id)
+        
+        post_query = get_object_or_404(Post, id=object_id)
+        if comment_id == '' and object_id :
             post = Post.objects.create(
                 description=description,
                 user=request.user,
+                comments=post_query
             )
+            post.save()
+            return redirect('post_detail', user_slug=post_query.user.slug, post_slug=post_query.slug)
         else:
-            post_obj = get_object_or_404(Post, comments=comment_id)
+            comment_query = get_object_or_404(Post,id=comment_id)
             post = Post.objects.create(
                 description=description,
                 user=request.user,
-                comments=post_obj,
+                comments=comment_query
             )
-            post.
-
+            post.save()
+            return redirect('post_detail', user_slug=post_query.user.slug, post_slug=post_query.slug)
     return redirect('index')

@@ -43,7 +43,7 @@
                 {% include 'pages/posts/includes/add_comment.html' with comments=comment %}
             </div>
             <div class="flex-1 mb-2 ">
-                {% include 'pages/posts/includes/comment_tree.html' with comments=comment.all %}
+                {% include 'pages/posts/includes/comment_tree.html' with comments=comment.child_comments.all %}
             </div>
         </div>
     </div>

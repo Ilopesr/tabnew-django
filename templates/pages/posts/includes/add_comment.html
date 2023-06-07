@@ -3,6 +3,7 @@
 
     <div class="send w-full flex flex-col gap-4 justify-end">
         <input type="hidden" name="comment_id" value="{{comment.id}}">
+        <input type="hidden" name="object_id" value="{{object.id}}">
         {{form.description}}
         <div class="flex flex-row justify-end gap-4">
             <div onmousedown="closeForm(this)"
