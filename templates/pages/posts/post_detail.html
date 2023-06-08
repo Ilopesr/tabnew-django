@@ -11,8 +11,8 @@
                     <div class="flex flex-col items-center gap-2">
                         <div class="flex flex-col items-center justify-start gap-2">
                             <button hx-post="{% url 'like' pk=object.id %}" hx-trigger="click" hx-swap="none"
-                                hx-include="[name='id']">
-                                <input type="hidden" name="id" value="{{object.id}}">
+                                hx-include="[name='id-{{object.id}}']">
+                                <input type="hidden" name="id-{{object.id}}" value="{{object.id}}">
                                 <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up"
                                     viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
                                     style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
@@ -23,7 +23,8 @@
                             </button>
                             <span class="text-blue-500">{{object.tab_coins}}</span>
                             <button hx-post="{% url 'deslike' pk=object.id %}" hx-trigger="click" hx-swap="none"
-                                hx-include="[name='id']">
+                                hx-include="[name='id-{{object.id}}']">
+                                <input type="hidden" name="id-{{object.id}}" value="{{object.id}}">
                                 <svg aria-hidden="true" focusable="false" role="img"
                                     class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16"
                                     fill="currentColor"
@@ -114,8 +115,8 @@
                     <div class="flex flex-col items-center gap-2">
                         <div class="flex flex-col items-center justify-start gap-2">
                             <button hx-post="{% url 'like' pk=comment.id %}" hx-trigger="click" hx-swap="none"
-                                hx-include="[name='id']">
-                                <input type="hidden" name="id" value="{{comment.id}}">
+                                hx-include="[name='id-{{comment.id}}']">
+                                <input type="hidden" name="id-{{comment.id}}" value="{{comment.id}}">
                                 <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up"
                                     viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
                                     style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
@@ -126,7 +127,8 @@
                             </button>
                             <span class="text-blue-500">{{comment.tab_coins}}</span>
                             <button hx-post="{% url 'deslike' pk=comment.id %}" hx-trigger="click" hx-swap="none"
-                                hx-include="[name='id']">
+                                hx-include="[name='id-{{comment.id}}']">
+                                <input type="hidden" name="id-{{comment.id}}" value="{{comment.id}}">
                                 <svg aria-hidden="true" focusable="false" role="img"
                                     class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16"
                                     fill="currentColor"
@@ -149,10 +151,10 @@
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-row gap-2 items-center">
                             <span
-                                class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{object.user.username}}
+                                class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{comment.user.username}}
                             </span>
                             <span>
-                                {{object.post_at}}
+                                {{comment.post_at}}
                             </span>
                         </div>
                         <div class="">

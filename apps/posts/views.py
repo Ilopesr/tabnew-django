@@ -77,32 +77,33 @@ def add_coment(request, *args, **kwargs):
     return redirect('index')
 
 
-def like(request, *args, **kwargs):
+def like(request, pk, *args, **kwargs):
+
     try:
         user = Account.objects.get(email=request.user.email)
         if user.tab_coins <= 1:
             return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
         else:
-            id = request.POST['id']
+            id = request.POST[f'id-{pk}']
             post_query = get_object_or_404(Post, id=id)
             post_query.tab_coins += 1
             post_query.save()
-
             user.tab_cash += 1
             user.tab_coins -= 2
             user.save()
     except ValueError:
         pass
+
     return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
 
 
-def deslike(request, *args, **kwargs):
+def deslike(request, pk, *args, **kwargs):
     try:
         user = Account.objects.get(email=request.user.email)
         if user.tab_coins <= 1:
             return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
         else:
-            id = request.POST['id']
+            id = request.POST[f'id-{pk}']
             post_query = get_object_or_404(Post, id=id)
             post_query.tab_coins -= 1
             post_query.save()
