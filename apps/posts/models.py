@@ -26,9 +26,25 @@ class Post(models.Model):
     tab_coins = models.IntegerField(default=0, blank=False, null=False)
     slug = models.SlugField(blank=True)
 
+    def get_total_comments(self):
+        def count_comments(comment):
+            count = 0  # Inicializa a contagem como zero
+
+            # Percorre os comentários filhos aninhados
+            for child_comment in comment.child_comments.all():
+                count += count_comments(child_comment)
+
+            return count + 1  # Retorna a contagem dos comentários filhos + 1
+
+        # Começa a contagem de comentários a partir dos comentários filhos
+        total_comments = count_comments(self) - 1
+
+        return total_comments
+
     def save(self, *args, **kwargs):
         if not self.title:
             self.slug = slugify(f"{uuid.uuid4().hex}")
+            self.title = self.slug
         else:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)

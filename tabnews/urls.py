@@ -20,11 +20,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-#MARKDOWN
+# MARKDOWN
 from markdownx import urls as markdownx
 # TABNEWS
 from tabnews import views
-#POSTS
+# POSTS
 from apps.posts.views import (NewPostView,
                               PostDetailView)
 # ACCOUNTS
@@ -41,6 +41,7 @@ from apps.accounts.views import (LoginView,
 
 # INCLUDE
 urlpatterns = [
+
     path('perfil/', include('apps.accounts.urls')),
     path('posts/', include('apps.posts.urls')),
     path('markdownx/', include(markdownx)),
@@ -55,21 +56,25 @@ urlpatterns += {
     path('cadastrar/', NewAccountView.as_view(), name="signup"),
     path('cadastrar/<uidb64>/<token>/', new_account_active, name="signup_active"),
     path('cadastro/recuperar/', RecoverPasswordView.as_view(), name="recover"),
-    path('cadastro/recuperar/confirmar/', NotifyEmailView.as_view(), name="email_notify"),
-    path('cadastro/recuperar/senha/decode/<uidb64>/<token>/', recover_password_decode, name="recover_decode"),
-    path('cadastro/recuperar/senha/validado/', ChangePasswordView.as_view(), name="change_password"),
+    path('cadastro/recuperar/confirmar/',
+         NotifyEmailView.as_view(), name="email_notify"),
+    path('cadastro/recuperar/senha/decode/<uidb64>/<token>/',
+         recover_password_decode, name="recover_decode"),
+    path('cadastro/recuperar/senha/validado/',
+         ChangePasswordView.as_view(), name="change_password"),
 }
 
-#HOME
+# HOME
 urlpatterns += {
     path('', views.IndexView.as_view(), name='index'),
 }
 
-#POSTS
+# POSTS
 
 urlpatterns += {
     path('publicar/', NewPostView.as_view(), name="new_post"),
-    path('<slug:user_slug>/<slug:post_slug>/', PostDetailView.as_view(), name="post_detail"),
+    path('<slug:user_slug>/<slug:post_slug>/',
+         PostDetailView.as_view(), name="post_detail"),
 }
 
 # ADMIN
