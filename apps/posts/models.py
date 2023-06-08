@@ -45,6 +45,8 @@ class Post(models.Model):
         if not self.title:
             self.slug = slugify(f"{uuid.uuid4().hex}")
             self.title = self.slug
+        elif slugify(self.title) != self.slug:
+            self.slug = slugify(self.title)
         else:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)

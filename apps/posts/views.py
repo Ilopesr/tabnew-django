@@ -32,6 +32,7 @@ class PostDetailView(DetailView, FormView):
     template_name = "pages/posts/post_detail.html"
     model = Post
     form_class = NewCommentForm
+    context = Post.objects.all()
 
     def get(self, *args, **kwargs):
         try:
