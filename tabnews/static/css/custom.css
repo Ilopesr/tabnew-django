@@ -208,9 +208,3 @@ span.linenos.special { color: #50fa7b; background-color: #6272a4; padding-left: 
 .default-html table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-
-.default-html p {
-    inline-size: 100%;
-    overflow-wrap: break-word;
-
-}

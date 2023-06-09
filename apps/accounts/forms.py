@@ -38,7 +38,7 @@ class AccountForm(forms.ModelForm):
 
 
 class RecoverPasswordForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput(
+    email = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'py-3 outline-blue-500 rounded-md indent-4 bg-gray-100 ring-[1px] ring-gray-500 ring-opacity-40 dark:bg-darkInput dark:text-white'}))
 
 
