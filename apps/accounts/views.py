@@ -152,26 +152,88 @@ class RecoverPasswordView(FormView):
     form_class = RecoverPasswordForm
 
     def form_valid(self, form):
+        """
+            Two methods of recover:
+            
+            1.Moderator method: Is a method used by moderators 
+            of the website for recover passwords from users who
+            lost your emails or something like that.
+            They can use the username only or use the email.
+            The moderator will receive  the email, and will generate a new
+            password from user.
+            2.Common user method: Using
+
+        """
         email = form.cleaned_data['email']
-        if email:
-            user = Account.objects.filter(email=email)
-            user = user.first()
-            mail_subject = "Recuperação de Senha"
-            mail_message = render_to_string("pages/accounts/notifications/recover_password_notify.html", {
-                'domain': get_current_site(self.request),
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user),
-                'user': user,
-            })
-            to_email = email
-            email = EmailMessage(
-                mail_subject,
-                mail_message,
-                config("EMAIL_HOST_USER"),
-                to=[to_email,]
-            )
-            email.send()
-            return redirect('email_notify')
+        if self.request.user.is_authenticated:
+            if email:
+                try:
+                    user = Account.objects.get(email=email)
+                except:
+                    user = Account.objects.get(username=email)
+
+                if user.email == self.request.user.email:
+                    mail_subject = "Recuperação de Senha"
+                    mail_message = render_to_string("pages/accounts/notifications/recover_password_notify.html", {
+                        'domain': get_current_site(self.request),
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'user': user,
+                    })
+                    to_email = email
+                    email = EmailMessage(
+                        mail_subject,
+                        mail_message,
+                        config("EMAIL_HOST_USER"),
+                        to=[to_email,]
+                    )
+                    email.send()
+                else:
+                    if self.request.user.is_authenticated:
+                        if self.request.user.is_superuser:
+                            try:
+                                user = Account.objects.get(email=email)
+                            except:
+                                user = Account.objects.get(username=email)
+                            mail_subject = "Moderação: Solicitação de recuperação de senha"
+                            mail_message = render_to_string("pages/accounts/notifications/moderator_recover_password_notify.html", {
+                                'domain': get_current_site(self.request),
+                                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                'token': default_token_generator.make_token(user),
+                                'user': user,
+                                'moderator': self.request.user,
+                            })
+                            to_email = self.request.user.email
+                            email = EmailMessage(
+                                mail_subject,
+                                mail_message,
+                                config("EMAIL_HOST_USER"),
+                                to=[to_email,]
+                            )
+                            email.send()
+        else:
+            if email:
+                try:
+                    user = Account.objects.get(email=email)
+                    mail_subject = "Recuperação de Senha"
+                    mail_message = render_to_string("pages/accounts/notifications/recover_password_notify.html", {
+                        'domain': get_current_site(self.request),
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'user': user,
+                    })
+                    to_email = email
+                    email = EmailMessage(
+                        mail_subject,
+                        mail_message,
+                        config("EMAIL_HOST_USER"),
+                        to=[to_email,]
+                    )
+                    email.send()
+                except:
+                    messages.error(self.request, "Utilizar email válido.")
+                    return redirect('recover')       
+        return redirect('email_notify')
 
 
 class NotifyEmailView(TemplateView):
