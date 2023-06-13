@@ -1,12 +1,17 @@
 
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, DetailView, FormView
-from django.urls import reverse, resolve
+from django.views.generic import (CreateView,
+                                  DetailView,
+                                  FormView,
+                                  UpdateView,
+                                  DeleteView
+                                  )
+from django.urls import reverse, resolve, reverse_lazy
 
 
 from apps.posts.models import Post
-from apps.posts.forms import NewPostForm, NewCommentForm
+from apps.posts.forms import NewPostForm, NewCommentForm, PostUpdateForm, CommentUpdateForm
 from apps.accounts.models import Account
 
 
@@ -113,3 +118,83 @@ def deslike(request, pk, *args, **kwargs):
     except ValueError:
         pass
     return HTTPResponseHXRedirect(request.META.get('HTTP_REFERER'))
+
+
+class PostUpdateView(UpdateView):
+    template_name = "pages/posts/edit_post.html"
+    model = Post
+    form_class = PostUpdateForm
+
+    def get_object(self):
+        slug = self.kwargs.get('post_slug')
+        return get_object_or_404(Post, slug=slug)
+
+    def form_valid(self, form):
+        user = Account.objects.get(email=self.request.user.email)
+        user_form = form.save(commit=False)
+        user_form.user = user
+        user_form.save()
+        return super().form_valid(form)
+
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(PostUpdateView, self).get_form_kwargs(*args, **kwargs)
+        kwargs['instance'] = Post.objects.get(
+            slug=self.kwargs.get('post_slug'))
+        return kwargs
+
+
+class PostDeleteView(DeleteView):
+    template_name = "pages/posts/post_detail.html"
+    model = Post
+
+    def get_object(self):
+        slug = self.kwargs.get('post_slug')
+        return get_object_or_404(Post, slug=slug)
+
+    def post(self, request, *args, **kwargs):
+        uri = self.request.META.get('HTTP_REFERER')
+        uri_parts = uri.split('/')
+        uri_parts_sep = list(filter(str.strip, uri_parts))
+        user_slug = uri_parts_sep[-2]
+        post_slug = uri_parts_sep[-1]
+        slug = self.kwargs.get('post_slug')
+        post = get_object_or_404(Post, slug=slug)
+        post.delete()
+        if post.comments is not None:
+            return HTTPResponseHXRedirect(redirect_to=reverse_lazy('post_detail', kwargs={'user_slug': user_slug, 'post_slug': post_slug}))
+        else:
+            return HTTPResponseHXRedirect(redirect_to=reverse_lazy(('index')))
+
+
+class CommentUpdateView(UpdateView):
+    template_name = "pages/posts/edit_comment.html"
+    model = Post
+    form_class = CommentUpdateForm
+
+    def get_object(self):
+        slug = self.kwargs.get('post_slug')
+        return get_object_or_404(Post, slug=slug)
+
+    def get_success_url(self):
+        super().get_success_url()
+        # Obtenha o referer HTTP
+        referer = self.request.META.get('HTTP_REFERER')
+        uri_parts = referer.split('/')
+        uri_parts_sep = list(filter(str.strip, uri_parts))
+        user_slug = uri_parts_sep[-2]
+        post_slug = uri_parts_sep[-1]
+        return HttpResponseRedirect(redirect_to=reverse_lazy('post_detail', kwargs={'user_slug': user_slug, 'post_slug': post_slug}))
+
+    def form_valid(self, form):
+        user = Account.objects.get(email=self.request.user.email)
+        user_form = form.save(commit=False)
+        user_form.user = user
+        user_form.save()
+        return self.get_success_url()
+
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(CommentUpdateView, self).get_form_kwargs(
+            *args, **kwargs)
+        kwargs['instance'] = Post.objects.get(
+            slug=self.kwargs.get('post_slug'))
+        return kwargs

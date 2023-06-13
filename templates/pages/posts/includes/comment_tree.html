@@ -1,101 +1,111 @@
 {% load static%}
 {% load markdown_filter %}
 {% for comment in comments %}
-<div class="container mx-auto max-w-5xl ">
-    <div class="flex">
-        <div class="flex flex-col items-center  w-8">
-            <div class=" flex flex-col justify-start items-center gap-2 text-gray-400">
-                <div class="flex flex-col items-center gap-2">
-                    <div class="flex flex-col items-center justify-start gap-2">
-                        <button hx-post="{% url 'like' pk=comment.id %}" hx-trigger="click" hx-swap="none"
-                            hx-include="[name='id']">
-                            <input type="hidden" name="id" value="{{comment.id}}">
-                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up"
-                                viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
-                                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
-                                <path
-                                    d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z">
-                                </path>
-                            </svg>
-                        </button>
-                        <span class="text-blue-500">{{comment.tab_coins}}</span>
-                        <button hx-post="{% url 'deslike' pk=comment.id %}" hx-trigger="click" hx-swap="none"
-                            hx-include="[name='id']">
-                            <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-down"
-                                viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
-                                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
-                                <path
-                                    d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center h-full w-full group px-4">
-                <span class="border-l-[1px] w-[0.125rem] border-dotted group-hover:border-red-500"></span>
-            </div>
-        </div>
-        <div class="flex-1 max-w-5xl flex gap-2 text-xs pt-1">
+<div id="undo-target-{{comment.id}}">
+    <div id="do-target-{{comment.id}}" class="container mx-auto max-w-5xl ">
+        <div class="flex">
+            <div class="flex flex-col items-center  w-8">
+                <div class=" flex flex-col justify-start items-center gap-2 text-gray-400">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="flex flex-col items-center justify-start gap-2">
 
-            <div class="flex flex-col gap-1 w-full max-w-5xl">
-                <div class="flex flex-row justify-between">
-                    <div class="flex flex-row gap-2 items-center">
-                        <span
-                            class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{comment.user.username}}
-                        </span>
-                        <span>
-                            {{comment.post_at}}
-                        </span>
-                    </div>
-                    <div class="">
-                        <details class="relative">
-                            <summary
-                                class="w-[28px] h-[28px] ring-[1px] ring-gray-400 rounded-md bg-gray-100 flex items-center justify-center dark:bg-darkButton dark:text-gray-200 cursor-pointer">
+                            <button hx-post="#" hx-trigger="click"
+                                hx-target=".like-count-comment-{{comment.id}}" hx-swap="innerHTML">
+                                <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-chevron-up"
+                                    viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
+                                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                                    <path
+                                        d="M3.22 10.53a.749.749 0 0 1 0-1.06l4.25-4.25a.749.749 0 0 1 1.06 0l4.25 4.25a.749.749 0 1 1-1.06 1.06L8 6.811 4.28 10.53a.749.749 0 0 1-1.06 0Z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <div class="like-count-comment-{{comment.id}} text-blue-500">{{comment.likes.count}}
+                            </div>
+                            <button hx-post="#" hx-trigger="click"
+                                hx-target=".like-count-comment-{{comment.id}}" hx-swap="innerHTML">
                                 <svg aria-hidden="true" focusable="false" role="img"
-                                    class="octicon octicon-kebab-horizontal" viewBox="0 0 16 16" width="16" height="16"
+                                    class="octicon octicon-chevron-down" viewBox="0 0 16 16" width="16" height="16"
                                     fill="currentColor"
                                     style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
                                     <path
-                                        d="M8 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM1.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm13 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z">
+                                        d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z">
                                     </path>
                                 </svg>
-                            </summary>
-                            <ul
-                                class="absolute top-[110%] right-0 py-2 min-w-[200px] bg-white  dark:bg-dark text-neutral-800 dark:text-white border-[0.0125rem] border-gray-500 border-opacity-20 rounded-xl flex flex-col">
-                                <li
-                                    class="px-2 py-1 rounded-md text-sm cursor-pointer flex items-center gap-2 m-1 hover:bg-gray-100 dark:hover:bg-neutral-700 dark:hover:bg-opacity-30">
-                                    <svg aria-hidden="true" focusable="false" role="img" class="octicon octicon-pencil"
-                                        viewBox="0 0 16 16" width="16" height="16" fill="currentColor"
-                                        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
-                                        <path
-                                            d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
-                                        </path>
-                                    </svg>
-                                    <p>Editar</p>
-                                </li>
-                                <li>
-                                    <a>
-                                        <div
-                                            class="px-3 py-1 rounded-md  text-red-400 text-sm cursor-pointer m-1 hover:bg-red-300 hover:bg-opacity-20">
-                                            Excluir
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </details>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div
-                    class=" bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col gap-4 whitespace-pre-wrap">
-                    {{comment.description|show_markdown|safe}}
+                <div class="flex justify-center h-full w-full group px-4">
+                    <span class="border-l-[1px] w-[0.125rem] border-dotted group-hover:border-red-500"></span>
                 </div>
-                <div class="my-2 flex flex-col">
-                    {% include 'pages/posts/includes/add_comment.html' with comments=comment %}
-                </div>
-                <div class=" ">
-                    {% include 'pages/posts/includes/comment_tree.html' with comments=comment.child_comments.all %}
+            </div>
+            <div class="flex-1 max-w-5xl flex gap-2 text-xs pt-1">
+
+                <div class="flex flex-col gap-1 w-full max-w-5xl">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-row gap-2 items-center">
+                            <span
+                                class="text-blue-600 py-0.5 px-2 bg-blue-700 bg-opacity-10 rounded-md">{{comment.user.username}}
+                            </span>
+                            <span>
+                                {{comment.post_at}}
+                            </span>
+                        </div>
+                        <div class="">
+                            {% if request.user == comment.user %}
+                            <details class="relative mr-4">
+                                <summary
+                                    class="w-[28px] h-[28px] ring-[1px] ring-gray-400 rounded-md bg-gray-100 flex items-center justify-center dark:bg-darkButton dark:text-gray-200 cursor-pointer">
+                                    <svg aria-hidden="true" focusable="false" role="img"
+                                        class="octicon octicon-kebab-horizontal" viewBox="0 0 16 16" width="16"
+                                        height="16" fill="currentColor"
+                                        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                                        <path
+                                            d="M8 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM1.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm13 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z">
+                                        </path>
+                                    </svg>
+                                </summary>
+                                <ul
+                                    class="absolute top-[110%] right-0 py-2 min-w-[200px] bg-white  dark:bg-dark text-neutral-800 dark:text-white border-[0.0125rem] border-gray-500 border-opacity-20 rounded-xl flex flex-col">
+                                    <li hx-get="{% url 'comment_update' comment.user.slug comment.slug %}"
+                                        hx-target="#do-target-{{comment.id}}" hx-swap="outerHTML" hx-trigger="click"
+                                        class="px-2 py-1 rounded-md text-sm cursor-pointer flex items-center gap-2 m-1 hover:bg-gray-100 dark:hover:bg-neutral-700 dark:hover:bg-opacity-30">
+                                        <svg aria-hidden="true" focusable="false" role="img"
+                                            class="octicon octicon-pencil" viewBox="0 0 16 16" width="16" height="16"
+                                            fill="currentColor"
+                                            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;">
+                                            <path
+                                                d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25c.081-.286.235-.547.445-.758l8.61-8.61Zm.176 4.823L9.75 4.81l-6.286 6.287a.253.253 0 0 0-.064.108l-.558 1.953 1.953-.558a.253.253 0 0 0 .108-.064Zm1.238-3.763a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354Z">
+                                            </path>
+                                        </svg>
+                                        <p>Editar</p>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <div hx-post="{% url 'post_delete' comment.user.slug comment.slug %}"
+                                                hx-trigger="click"
+                                                hx-confirm="Tem certeza que deseja deletar este post?" hx-swap="none"
+                                                class="px-3 py-1 rounded-md  text-red-400 text-sm cursor-pointer m-1 hover:bg-red-300 hover:bg-opacity-20">
+                                                Excluir
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </details>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div
+                        class=" bg-gray-50 dark:bg-transparent default-html leading-6 flex flex-col  gap-4 max-w-sm sm:max-w-5xl">
+                        {{comment.description|show_markdown|safe}}
+                    </div>
+                    <div class="my-2 flex flex-col">
+                        {% include 'pages/posts/includes/add_comment.html' with comments=comment %}
+                    </div>
+                    <div class=" ">
+                        {% include 'pages/posts/includes/comment_tree.html' with comments=comment.child_comments.all %}
+                    </div>
                 </div>
             </div>
         </div>
