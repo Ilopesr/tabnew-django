@@ -723,10 +723,6 @@ video {
   max-width: 534px;
 }
 
-.max-w-md {
-  max-width: 28rem;
-}
-
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -816,15 +812,6 @@ video {
 
 .whitespace-pre-wrap {
   white-space: pre-wrap;
-}
-
-.break-normal {
-  overflow-wrap: normal;
-  word-break: normal;
-}
-
-.break-words {
-  overflow-wrap: break-word;
 }
 
 .rounded-lg {

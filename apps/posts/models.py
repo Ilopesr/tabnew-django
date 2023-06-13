@@ -75,7 +75,7 @@ class Post(models.Model):
             return ""
 
     def get_absolute_url(self, *args, **kwargs):
-        return reverse('index')
+        return reverse('post_detail', args=[self.user.slug, self.slug])
 
     def __str__(self):
         return self.title

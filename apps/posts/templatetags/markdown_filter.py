@@ -1,3 +1,4 @@
+import bleach
 from django import template
 from django.template.defaultfilters import stringfilter
 import markdown as md
@@ -9,7 +10,9 @@ register = template.Library()
 @register.filter
 @stringfilter
 def show_markdown(text):
-    return md.markdown(text , extensions=[
+    clean_text = bleach.clean(text)
+    
+    return md.markdown(clean_text , extensions=[
         'markdown.extensions.toc',
         'markdown.extensions.extra',
         'markdown.extensions.abbr',
